@@ -100,7 +100,7 @@ const products: Array<ProductInterface> = [
   {
     brand: "Nature's Bounty",
     name: 'Calcium Magnesium Zinc with Vitamin D3',
-    specifications: '5100 coated caplets',
+    specifications: '100 coated caplets',
     purpose: 'Reduce the risk of osteoporosis',
     images: [Img100503Front, Img100503Back],
     manufacturer: 'USA',

@@ -5,6 +5,7 @@ import './App.css';
 import products from './dataBase/products';
 import CatalogWrapper from './components/catalog/CatalogWrapper/CatalogWrapper';
 import Page404 from './components/Page404/Page404';
+import Header from './components/Header/Header';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -47,6 +48,7 @@ class App extends React.Component<any> {
   render() {
     return (
       <div className="App">
+        <Header currentPage="Catalog" />
         <Page404 />
         {/* <CatalogWrapper productsData={products} /> */}
       </div>

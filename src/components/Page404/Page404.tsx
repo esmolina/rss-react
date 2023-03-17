@@ -6,7 +6,7 @@ import Button from '../Buttons/Button';
 
 const cx = classNames.bind(styles);
 
-class Page404 extends Component<any> {
+class Page404 extends Component {
   render(): React.ReactNode {
     return (
       <div className={cx('page404__container')}>

@@ -1,3 +1,25 @@
 @use '../../stylesheets/variables/colors';
 @use '../../stylesheets/variables/numbers';
 @use '../../stylesheets/mixins/mixins.scss';
+
+.button {
+  color: colors.$little-card-text;
+  border: 1px solid colors.$buttons-border-color;
+  border-radius: numbers.$border-radius-buttons;
+  box-shadow: 0 0 40px 20px colors.$buttons-shadow-color;
+  padding: 10px 20px;
+  width: fit-content;
+  background: colors.$color-pure-white;
+  z-index: numbers.$z-index-button;
+  color: colors.$buttons-text-color;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.page404 {
+  margin-top: 10px;
+}
+
+.page404:hover {
+  background: colors.$buttons-background-color;
+}

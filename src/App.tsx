@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg';
 import './App.css';
 import products from './dataBase/products';
 import CatalogWrapper from './components/catalog/CatalogWrapper/CatalogWrapper';
+import Page404 from './components/Page404/Page404';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -46,7 +47,8 @@ class App extends React.Component<any> {
   render() {
     return (
       <div className="App">
-        <CatalogWrapper productsData={products} />
+        <Page404 />
+        {/* <CatalogWrapper productsData={products} /> */}
       </div>
     );
   }

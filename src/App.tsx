@@ -50,9 +50,9 @@ class App extends React.Component<any> {
     return (
       <div className="App">
         <Header currentPage="Catalog" />
-        <Page404 />
+        <CatalogWrapper productsData={products} />
+        {/* <Page404 /> */}
         <Footer />
-        {/* <CatalogWrapper productsData={products} /> */}
       </div>
     );
   }

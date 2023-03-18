@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import { HashRouter, BrowserRouter } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
+import React from 'react';
+// import { HashRouter, BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import products from './dataBase/products';
 import CatalogWrapper from './components/catalog/CatalogWrapper/CatalogWrapper';
 import Page404 from './components/Page404/Page404';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import About from './components/About/About';
+import {
+  aboutHeader,
+  companyName,
+  ourContacts,
+  productCategories,
+} from './components/About/AboutInfo';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -50,8 +57,21 @@ class App extends React.Component<any> {
     return (
       <div className="App">
         <Header currentPage="Catalog" />
-        <CatalogWrapper productsData={products} />
-        {/* <Page404 /> */}
+        <Routes>
+          <Route path="/" element={<CatalogWrapper productsData={products} />} />
+          <Route
+            path="/about"
+            element={
+              <About
+                companyName={companyName}
+                aboutHeader={aboutHeader}
+                productCategories={productCategories}
+                ourContacts={ourContacts}
+              />
+            }
+          />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
         <Footer />
       </div>
     );

@@ -1,0 +1,35 @@
+@use '../../../stylesheets/variables/colors';
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.about {
+  &__products-grid {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
+    background: colors.$color-about-background;
+    border: 1px solid colors.$primary-text-border;
+    border-radius: numbers.$border-radius;
+    width: 70%;
+    margin: 0 auto;
+
+  }
+
+  &__products-list {
+    list-style-type: none;
+    margin: 0 auto;
+    text-transform: uppercase;
+    color: colors.$little-card-rating;
+  }
+
+  &__img {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 0 10px 0;
+  }
+
+  &__products-text {
+    padding: 10px 20px;
+  }
+}

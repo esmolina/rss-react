@@ -20,6 +20,10 @@
   margin-top: 10px;
 }
 
-.page404:hover {
+.page404:hover, .home-page__button:hover  {
   background: colors.$buttons-background-color;
+}
+
+.home-page__button {
+  
 }

@@ -14,6 +14,7 @@ import {
   ourContacts,
   productCategories,
 } from './components/About/AboutInfo';
+import HomePage from './components/HomePage/HomePage';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -58,7 +59,8 @@ class App extends React.Component<any> {
       <div className="App">
         <Header currentPage="Catalog" />
         <Routes>
-          <Route path="/" element={<CatalogWrapper productsData={products} />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<CatalogWrapper productsData={products} />} />
           <Route
             path="/about"
             element={

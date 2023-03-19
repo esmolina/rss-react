@@ -6,9 +6,9 @@ import SearchIcon from '../../assets/icons/search.svg';
 
 const cx = classNames.bind(styles);
 
-class Searcher extends React.Component<{}, SearcherState> {
-  constructor() {
-    super({});
+class Searcher extends React.Component<Record<string, never>, SearcherState> {
+  constructor(props: Record<string, never>) {
+    super(props);
     this.state = { inputValue: localStorage.getItem('inputValue') || '' };
   }
 

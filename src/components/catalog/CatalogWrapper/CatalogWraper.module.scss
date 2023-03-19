@@ -1,5 +1,11 @@
-catalog-wrapper {
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.catalog-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: numbers.$max-page-width;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -5,6 +5,8 @@
 .about {
   display: flex;
   flex-direction: column;
+  max-width: numbers.$max-page-width;
+  margin: 0 auto 320px;
 
   &__description {
     font-size: 18px;

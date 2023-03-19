@@ -3,10 +3,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.scss';
 import Button from '../Buttons/Button';
+import { HomePageProps } from './HomePagTypes';
 
 const cx = classNames.bind(styles);
 
-class About extends Component {
+class About extends Component<HomePageProps> {
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.handleGoAnotherChange('Home');
+  }
+
   render(): React.ReactNode {
     return (
       <div className={cx('home-page')}>

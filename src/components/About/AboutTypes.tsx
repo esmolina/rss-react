@@ -17,4 +17,5 @@ export interface AboutProps {
   aboutHeader: string;
   productCategories: ProductCategories;
   ourContacts: Contacts;
+  handleGoAnotherChange: (pageName: string) => void;
 }

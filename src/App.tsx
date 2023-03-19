@@ -14,15 +14,37 @@ import {
   productCategories,
 } from './components/About/AboutInfo';
 import HomePage from './components/HomePage/HomePage';
+import { AppStateProps } from './AppTypes';
 
-class App extends React.Component {
+class App extends React.Component<Record<string, never>, AppStateProps> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = { currentPage: '' };
+  }
+
+  handleGoAnotherChange = (pageName: string) => {
+    this.setState({ currentPage: pageName });
+  };
+
   render() {
+    const { currentPage } = this.state;
     return (
       <div className="App">
-        <Header currentPage="Catalog" />
+        <Header currentPage={currentPage} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/catalog" element={<CatalogWrapper productsData={products} />} />
+          <Route
+            path="/"
+            element={<HomePage handleGoAnotherChange={this.handleGoAnotherChange} />}
+          />
+          <Route
+            path="/catalog"
+            element={
+              <CatalogWrapper
+                productsData={products}
+                handleGoAnotherChange={this.handleGoAnotherChange}
+              />
+            }
+          />
           <Route
             path="/about"
             element={
@@ -31,10 +53,14 @@ class App extends React.Component {
                 aboutHeader={aboutHeader}
                 productCategories={productCategories}
                 ourContacts={ourContacts}
+                handleGoAnotherChange={this.handleGoAnotherChange}
               />
             }
           />
-          <Route path="*" element={<Page404 />} />
+          <Route
+            path="*"
+            element={<Page404 handleGoAnotherChange={this.handleGoAnotherChange} />}
+          />
         </Routes>
         <Footer />
       </div>

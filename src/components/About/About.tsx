@@ -8,6 +8,11 @@ import ContactsBlock from './Contacts/Contacts';
 const cx = classNames.bind(styles);
 
 class About extends Component<AboutProps> {
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.handleGoAnotherChange('About');
+  }
+
   render(): React.ReactNode {
     const { companyName, aboutHeader, productCategories, ourContacts } = this.props;
     return (

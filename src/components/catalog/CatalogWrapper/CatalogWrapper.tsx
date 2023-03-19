@@ -9,6 +9,11 @@ import Searcher from '../../Searcher/Searcher';
 const cx = classNames.bind(styles);
 
 class CatalogWrapper extends React.Component<CatalogWrapperProps> {
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.handleGoAnotherChange('Catalog');
+  }
+
   render() {
     const { productsData } = this.props;
     return (

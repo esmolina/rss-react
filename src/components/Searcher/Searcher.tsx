@@ -20,8 +20,6 @@ class Searcher extends React.Component<Record<string, never>, SearcherState> {
   handleChangeInput = (eventInput: React.ChangeEvent<HTMLInputElement>) => {
     eventInput.preventDefault();
     this.setState({ inputValue: eventInput.target.value });
-    // eslint-disable-next-line react/destructuring-assignment
-    // localStorage.setItem('inputValue', eventInput.target.value);
   };
 
   render() {

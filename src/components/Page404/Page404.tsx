@@ -27,9 +27,3 @@ class Page404 extends Component<Page404Props> {
 }
 
 export default Page404;
-
-// <Link to="/ ">
-//   <button type="button" className={cx('main__content-homelink')}>
-//     Let`s go to catalog ;)
-//   </button>
-// </Link>

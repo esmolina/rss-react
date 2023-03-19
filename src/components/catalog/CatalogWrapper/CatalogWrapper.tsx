@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import LittleCard from '../LittleCard/LittleCard';
-import { ProductInterface } from '../../../dataBase/dataBaseTypes';
 import { CatalogWrapperProps } from './CatalogWrapperTypes';
 import styles from './CatalogWraper.module.scss';
 import Searcher from '../../Searcher/Searcher';
+import CardsList from '../CardsList/CardsList';
 
 const cx = classNames.bind(styles);
 
@@ -19,11 +18,7 @@ class CatalogWrapper extends React.Component<CatalogWrapperProps> {
     return (
       <div className={cx('catalog-wrapper')}>
         <Searcher />
-        <div className={cx('catalog-grid')}>
-          {productsData.map((product: ProductInterface) => {
-            return <LittleCard product={product} key={product.productCode} />;
-          })}
-        </div>
+        <CardsList productsData={productsData} />
       </div>
     );
   }

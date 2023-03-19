@@ -39,7 +39,10 @@ class LittleCard extends Component<LittleCardProps> {
             <p className={cx('little-card__rating')}>{`Rating:  ${(
               rating / reviewsQuantity
             ).toFixed(1)} for ${reviewsQuantity} buyers`}</p>
-            <p className={cx('little-card__price')}>{`${product.price}$`}</p>
+            <p
+              data-testid="test-price"
+              className={cx('little-card__price')}
+            >{`${product.price}$`}</p>
           </div>
         </div>
       </div>

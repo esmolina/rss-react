@@ -47,3 +47,7 @@
     box-shadow: 0 0 80px 40px colors.$page-404-text-background;
   }
 }
+
+.router-link-404 {
+  z-index: numbers.$z-index-link;
+}

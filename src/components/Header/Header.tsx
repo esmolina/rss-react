@@ -11,14 +11,20 @@ class Header extends Component<HeaderProps> {
     const { currentPage } = this.props;
     return (
       <div className={cx('header')}>
-        <h1 className={cx('header__title')}>Beauty Land</h1>
+        <Link to="/" className={cx('header__router-link')}>
+          <h1 className={cx('header__title')}>Beauty Land</h1>
+        </Link>
         <div className={cx('header__current-page')}>
           <p className={cx('header__current-page-static')}> Current page:</p>
           <p className={cx('header__current-page-dynamic')}>{currentPage}</p>
         </div>
         <nav className={cx('header__nav')}>
-          <li className={cx('header__nav-item')}>Catalog</li>
-          <li className={cx('header__nav-item')}>About as</li>
+          <Link to="/catalog" className={cx('header__router-link')}>
+            <li className={cx('header__nav-item')}>Catalog</li>
+          </Link>
+          <Link to="/about" className={cx('header__router-link')}>
+            <li className={cx('header__nav-item')}>About as</li>
+          </Link>
         </nav>
       </div>
     );

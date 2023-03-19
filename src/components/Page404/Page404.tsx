@@ -12,7 +12,9 @@ class Page404 extends Component {
       <div className={cx('page404__container')}>
         <h1 className={cx('page404__number')}>404</h1>
         <p className={cx('page404__text')}>Oops! This page doesn`t exist..</p>
-        <Button buttonText="Let's go to catalog ;)" customClass="page404" />
+        <Link to="/catalog" className={cx('router-link-404')}>
+          <Button buttonText="Let's go to catalog ;)" customClass="page404" />
+        </Link>
       </div>
     );
   }

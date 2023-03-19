@@ -43,9 +43,25 @@
   }
 
   &__nav-item{
+    position: relative;
     text-decoration: none;
     list-style-type: none;
     margin-left: 20px;
     font-size: 18px;
+    color: colors.$primary-text-color;
+    z-index: numbers.$z-index-button;
+  }
+
+  &__router-link {
+    text-decoration: none;
+    z-index: numbers.$z-index-link;
+  }
+
+  &__router-link:hover {
+    text-decoration-color: colors.$header-current-page-color;
+  }
+
+  &__router-link:active{
+    text-decoration-color: colors.$header-current-page-color;
   }
 }

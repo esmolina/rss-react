@@ -14,14 +14,12 @@ import {
   productCategories,
 } from './components/About/AboutInfo';
 import HomePage from './components/HomePage/HomePage';
-import Searcher from './components/Searcher/Searcher';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
         <Header currentPage="Catalog" />
-        <Searcher inputInfo="" />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogWrapper productsData={products} />} />

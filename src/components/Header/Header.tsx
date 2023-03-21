@@ -23,7 +23,7 @@ class Header extends Component<HeaderProps> {
             <li className={cx('header__nav-item')}>Catalog</li>
           </Link>
           <Link to="/about" className={cx('header__router-link')}>
-            <li className={cx('header__nav-item')}>About as</li>
+            <li className={cx('header__nav-item')}>About us</li>
           </Link>
         </nav>
       </div>

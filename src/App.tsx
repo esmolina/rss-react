@@ -14,6 +14,7 @@ import {
   productCategories,
 } from './components/About/AboutInfo';
 import HomePage from './components/HomePage/HomePage';
+import FeedbackPage from './components/Feedback/FeedbackPage/FeedbackPage';
 import { AppStateProps } from './AppTypes';
 
 class App extends React.Component<Record<string, never>, AppStateProps> {
@@ -24,6 +25,11 @@ class App extends React.Component<Record<string, never>, AppStateProps> {
 
   handleGoAnotherChange = (pageName: string) => {
     this.setState({ currentPage: pageName });
+  };
+
+  // eslint-disable-next-line class-methods-use-this
+  handleQuizNameInput = () => {
+    console.log('Test handle text input');
   };
 
   render() {
@@ -54,6 +60,15 @@ class App extends React.Component<Record<string, never>, AppStateProps> {
                 productCategories={productCategories}
                 ourContacts={ourContacts}
                 handleGoAnotherChange={this.handleGoAnotherChange}
+              />
+            }
+          />
+          <Route
+            path="/feedback"
+            element={
+              <FeedbackPage
+                handleGoAnotherChange={this.handleGoAnotherChange}
+                handleQuizNameInput={this.handleQuizNameInput}
               />
             }
           />

@@ -1,0 +1,46 @@
+@use '../../../stylesheets/variables/colors';
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.input {
+  padding: 0;
+  box-sizing: border-box;
+
+  &__guiz {
+    width: 100%;
+    margin: 5px;
+    outline: none;
+    transition: all 300ms ease-in-out;
+
+    &-empty {
+      border: 1px solid colors.$color-empty-input;
+    }
+
+    &-right {
+      border: 1px solid colors.$color-right-input;
+    }
+
+    &-wrong {
+      border: 1.5px solid colors.$color-wrong-input;
+    }
+  }
+}
+
+.input.wrong label {
+  color: colors.$color-empty-input;
+}
+
+.label {
+  padding: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: colors.$primary-text-color;
+}
+
+.spanForInput {
+  &__error-message {
+    color: colors.$color-error-message-input;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}

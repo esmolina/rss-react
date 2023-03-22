@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import React, { Component } from 'react';
 import styles from './Header.module.scss';
 import { HeaderProps } from './headerTypes';
@@ -19,12 +19,15 @@ class Header extends Component<HeaderProps> {
           <p className={cx('header__current-page-dynamic')}>{currentPage}</p>
         </div>
         <nav className={cx('header__nav')}>
-          <Link to="/catalog" className={cx('header__router-link')}>
+          <NavLink to="/catalog" className={cx('header__router-link')}>
             <li className={cx('header__nav-item')}>Catalog</li>
-          </Link>
-          <Link to="/about" className={cx('header__router-link')}>
+          </NavLink>
+          <NavLink to="/about" className={cx('header__router-link')}>
             <li className={cx('header__nav-item')}>About us</li>
-          </Link>
+          </NavLink>
+          <NavLink to="/feedback" className={cx('header__router-link')}>
+            <li className={cx('header__nav-item')}>Feedback</li>
+          </NavLink>
         </nav>
       </div>
     );

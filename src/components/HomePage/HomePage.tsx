@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.scss';
-import Button from '../Buttons/Button';
+import Button from '../Elements/Buttons/Button';
 import { HomePageProps } from './HomePagTypes';
 
 const cx = classNames.bind(styles);

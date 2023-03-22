@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import styles from './Page404.module.scss';
-import Button from '../Buttons/Button';
+import Button from '../Elements/Buttons/Button';
 import { Page404Props } from './Page404Types';
 
 const cx = classNames.bind(styles);

@@ -16,10 +16,16 @@ class FeedbackCard extends Component<FeedbackCardProps> {
           { 'feedback__is-bad': opinion === 'bad' }
         )}
       >
+        <p className={cx('feedback__card-text-static')}>User-name</p>
         <p className={cx('feedback__card-text', 'feedback__userName')}>{userName}</p>
+        <p className={cx('feedback__card-text-static')}>Our product</p>
         <p className={cx('feedback__card-text', 'feedback__product')}>{product}</p>
+        <p className={cx('feedback__card-text-static')}>Date of purchase</p>
         <p className={cx('feedback__card-text', 'feedback__datePurchase')}>{datePurchase}</p>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <p className={cx('feedback__card-text-static')}>User's opinion</p>
         <p className={cx('feedback__card-text', 'feedback__opinion')}>{opinion}</p>
+        <p className={cx('feedback__card-text-static')}>Photo</p>
         {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
         <img src={photoPath} alt="Product photo" />
       </div>

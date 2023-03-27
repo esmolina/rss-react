@@ -38,11 +38,12 @@ class FeedbackPage extends Component<FeedbackPageProps, FeedbackPageState> {
       this.setState({
         feedbacks: previousFeedbacks,
       });
+      console.log(previousFeedbacks);
     };
 
     return (
       <div className={cx('feedback__wrapper')}>
-        <Quiz />
+        <Quiz handleNewFeedback={handleNewFeedback} />
         {feedbacks.map((feedback) => {
           return (
             <FeedbackCard

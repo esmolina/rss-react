@@ -18,7 +18,7 @@ class About extends Component<HomePageProps> {
       <div className={cx('home-page')}>
         <h1 className={cx('home-page__header')}>Beauty Land</h1>
         <Link to="/catalog" className={cx('home-page__router-link')}>
-          <Button buttonText="Go to Catalog" customClass="home-page__button" />
+          <Button buttonType="button" buttonText="Go to Catalog" customClass="home-page__button" />
         </Link>
       </div>
     );

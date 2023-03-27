@@ -60,12 +60,7 @@ class App extends React.Component<Record<string, never>, AppStateProps> {
           />
           <Route
             path="/feedback"
-            element={
-              <FeedbackPage
-                handleGoAnotherChange={this.handleGoAnotherChange}
-                handleQuizNameInput={this.handleQuizNameInput}
-              />
-            }
+            element={<FeedbackPage handleGoAnotherChange={this.handleGoAnotherChange} />}
           />
           <Route
             path="*"

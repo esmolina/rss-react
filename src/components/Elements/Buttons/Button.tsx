@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 class Button extends Component<ButtonProps> {
   render(): React.ReactNode {
-    const { buttonText, customClass } = this.props;
+    const { buttonType, buttonText, customClass } = this.props;
     return (
       <button type="button" className={cx('button', customClass)}>
         {buttonText}

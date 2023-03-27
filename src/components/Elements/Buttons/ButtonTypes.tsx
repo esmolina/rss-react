@@ -1,5 +1,7 @@
 export interface ButtonProps {
-  buttonType: string | undefined;
+  buttonType: 'button' | 'submit' | 'reset' | undefined;
   buttonText: string;
   customClass: string;
+  isSubmit: boolean;
+  handleSubmit?: () => void;
 }

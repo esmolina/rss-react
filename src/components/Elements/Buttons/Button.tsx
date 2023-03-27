@@ -6,10 +6,16 @@ import { ButtonProps } from './ButtonTypes';
 const cx = classNames.bind(styles);
 
 class Button extends Component<ButtonProps> {
+  noHandler = () => {
+    return 'is not handler';
+  };
+
   render(): React.ReactNode {
-    const { buttonType, buttonText, customClass } = this.props;
+    const { buttonType, buttonText, customClass, isSubmit, handleSubmit } = this.props;
+    const handler = isSubmit ? handleSubmit : this.noHandler;
     return (
-      <button type="button" className={cx('button', customClass)}>
+      // eslint-disable-next-line react/button-has-type
+      <button type={buttonType} className={cx('button', customClass)} onClick={handler}>
         {buttonText}
       </button>
     );

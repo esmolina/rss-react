@@ -3,10 +3,11 @@ import classNames from 'classnames/bind';
 import styles from './Quiz.module.scss';
 import products from '../../../dataBase/products';
 import Button from '../../Elements/Buttons/Button';
+import { QuizState } from './QuizTypes';
 
 const cx = classNames.bind(styles);
 
-class Quiz extends Component<unknown> {
+class Quiz extends Component<unknown, QuizState> {
   quizRef: React.RefObject<HTMLFormElement> = React.createRef();
 
   nameRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -23,9 +24,95 @@ class Quiz extends Component<unknown> {
 
   agreementRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-  render(): React.ReactNode {
-    const optionsList: Array<string> = [];
+  constructor(props: unknown) {
+    super(props);
+    this.state = {
+      nameIsValid: true,
+      dateIsValid: true,
+      productIsValid: true,
+      estimateIsValid: true,
+      fileCoordsIsValid: true,
+      agreementIsValid: true,
+      allFormIsValid: false,
+      showMessage: false,
+    };
+  }
+
+  nameCheck = (name: string) => {
+    return name.length >= 2;
+  };
+
+  dateCheck = (date: string) => {
+    return new Date(date) && new Date(date) < new Date() && new Date(date) > new Date('2020-01-01');
+  };
+
+  selectCheck = (select: string) => {
+    return select !== 'not selected';
+  };
+
+  radioCheck = (...params: Array<boolean>) => {
+    const radios = [...params];
+    let result = false;
+    let i = 0;
+    while (!result && i < radios.length) {
+      if (radios[i]) result = true;
+      i += 1;
+    }
+    return result;
+  };
+
+  fileCheck = (url: string) => {
+    return url.length === 0;
+  };
+
+  agreementCheck = (agreement: boolean) => {
+    return agreement;
+  };
+
+  validation = () => {
+    const resultCheckName = this.nameCheck(this.nameRef.current?.value || '');
+    const resultCheckDate = this.dateCheck(this.dateRef.current?.value || '');
+    const resultCheckSelect = this.selectCheck(this.productRef.current?.value || '');
+    const resultCheckRadio = this.radioCheck(
+      this.goodScoreRef.current?.checked as boolean,
+      this.badScoreRef.current?.checked as boolean
+    );
+    const resultCheckFile = this.fileCheck(this.photoRef.current?.value || '');
+    const resultCheckAgreement = this.agreementCheck(this.agreementRef.current?.checked || false);
+    const finishResult =
+      resultCheckName &&
+      resultCheckDate &&
+      resultCheckSelect &&
+      resultCheckRadio &&
+      resultCheckFile &&
+      resultCheckAgreement;
+
+    this.setState({
+      nameIsValid: resultCheckName,
+      dateIsValid: resultCheckDate,
+      productIsValid: resultCheckSelect,
+      estimateIsValid: resultCheckRadio,
+      fileCoordsIsValid: resultCheckFile,
+      agreementIsValid: resultCheckAgreement,
+      allFormIsValid: finishResult,
+      showMessage: finishResult,
+    });
+  };
+
+  render() {
+    const optionsList: Array<string> = ['not selected'];
     products.map((product) => optionsList.push(`${product.brand} - ${product.name}`));
+    const {
+      nameIsValid,
+      dateIsValid,
+      productIsValid,
+      estimateIsValid,
+      fileCoordsIsValid,
+      agreementIsValid,
+      allFormIsValid,
+      showMessage,
+    } = this.state;
+
     return (
       <div className={cx('quiz__wrapper')}>
         <form ref={this.quizRef}>
@@ -38,14 +125,27 @@ class Quiz extends Component<unknown> {
             id="input-quiz-name"
             placeholder="John Doe"
             className={cx('input')}
+            required
           />
-          <span className={cx('input__span')}>Please, correct data</span>
+          {!nameIsValid && <span className={cx('input__span')}>Please, correct data</span>}
 
           <label htmlFor="input-quiz-date" className={cx('label')}>
             Date of purchase...
           </label>
-          <input ref={this.dateRef} type="date" id="input-quiz-date" className={cx('input')} />
-          <span className={cx('input__span')}>Please, correct data</span>
+          <input
+            ref={this.dateRef}
+            type="date"
+            id="input-quiz-date"
+            className={cx('input')}
+            autoComplete="off"
+            required
+          />
+          {!dateIsValid && (
+            <span className={cx('input__span')}>
+              Please, correct data.The purchase cannot be earlier than 01.01.2020 and later than the
+              current date
+            </span>
+          )}
 
           <label htmlFor="input-quiz-select" className={cx('label')}>
             I bought...
@@ -56,6 +156,7 @@ class Quiz extends Component<unknown> {
             id="input-quiz-select"
             className={cx('select')}
             defaultValue=""
+            required
           >
             {optionsList.map((option) => {
               return (
@@ -65,7 +166,7 @@ class Quiz extends Component<unknown> {
               );
             })}
           </select>
-          <span className={cx('input__span')}>Please select the product</span>
+          {!productIsValid && <span className={cx('input__span')}>Please select the product</span>}
 
           <label htmlFor="input-quiz-radio" className={cx('label')}>
             I think this product deserves estimation...
@@ -99,12 +200,13 @@ class Quiz extends Component<unknown> {
             </label>
           </p>
 
-          <span className={cx('input__span')}>Please, enter score</span>
+          {!estimateIsValid && <span className={cx('input__span')}>Please, enter score</span>}
 
           <label htmlFor="input-quiz-file" className={cx('label')}>
             Add photo
           </label>
           <input ref={this.photoRef} type="file" name="input-quiz-file" />
+          {!fileCoordsIsValid && <span className={cx('input__span')}>Please, download photo</span>}
 
           <p>
             <label htmlFor="input-quiz-checkbox" className={cx('label')}>
@@ -115,16 +217,22 @@ class Quiz extends Component<unknown> {
               type="checkbox"
               id="input-quiz-checkbox"
               className={cx('input__checkbox')}
+              required
             />
-            <span className={cx('input__span')}>
-              Without your consent, we will not be able to publish a response
-            </span>
+            {!agreementIsValid && (
+              <span className={cx('input__span')}>
+                Without your consent, we will not be able to publish a response
+              </span>
+            )}
           </p>
 
           <Button
             buttonType="submit"
             buttonText="Send feedback"
             customClass="button__quiz-submit"
+            // eslint-disable-next-line react/jsx-boolean-value
+            isSubmit={true}
+            handleSubmit={this.validation}
           />
         </form>
       </div>

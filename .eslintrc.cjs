@@ -15,6 +15,7 @@ module.exports = {
     "react/prefer-stateless-function": "off",
     "@typescript-eslint/no-var-requires": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "class-methods-use-this": "off"
   }
 }

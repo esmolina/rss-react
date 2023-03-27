@@ -8,8 +8,6 @@ import { QuizProps, QuizState } from './QuizTypes';
 const cx = classNames.bind(styles);
 
 class Quiz extends Component<QuizProps, QuizState> {
-  quizRef: React.RefObject<HTMLFormElement> = React.createRef();
-
   nameRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   dateRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -73,6 +71,27 @@ class Quiz extends Component<QuizProps, QuizState> {
     return agreement;
   };
 
+  clearForm = () => {
+    this.nameRef.current!.value = '';
+    this.dateRef.current!.value = '';
+    this.productRef.current!.value = 'not selected';
+    this.photoRef.current!.value = '';
+    this.goodScoreRef.current!.checked = false;
+    this.badScoreRef.current!.checked = false;
+    this.agreementRef.current!.checked = false;
+
+    this.setState({
+      nameIsValid: true,
+      dateIsValid: true,
+      productIsValid: true,
+      estimateIsValid: true,
+      fileCoordsIsValid: true,
+      agreementIsValid: true,
+      allFormIsValid: false,
+      showMessage: false,
+    });
+  };
+
   handleClickSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
     const newFeedbackName = this.nameRef.current?.value || '';
@@ -124,6 +143,8 @@ class Quiz extends Component<QuizProps, QuizState> {
     };
 
     this.props.handleNewFeedback(newFeedback);
+
+    setTimeout(this.clearForm, 3000);
   };
 
   render() {
@@ -146,7 +167,7 @@ class Quiz extends Component<QuizProps, QuizState> {
 
     return (
       <div className={cx('quiz__wrapper')}>
-        <form ref={this.quizRef}>
+        <form>
           <label htmlFor="input-quiz-name" className={cx('label')}>
             My name...
           </label>

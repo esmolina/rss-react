@@ -1,0 +1,30 @@
+import React, { Component } from 'react';
+import classNames from 'classnames/bind';
+import styles from './FeedbackCard.module.scss';
+import { FeedbackCardProps } from './FeedbackCardTypes';
+
+const cx = classNames.bind(styles);
+
+class FeedbackCard extends Component<FeedbackCardProps> {
+  render(): React.ReactNode {
+    const { userName, product, datePurchase, opinion, photoPath } = this.props;
+    return (
+      <div
+        className={cx(
+          'feedback__card',
+          { 'feedback__is-good': opinion === 'good' },
+          { 'feedback__is-bad': opinion === 'bad' }
+        )}
+      >
+        <p className={cx('feedback__card-text', 'feedback__userName')}>{userName}</p>
+        <p className={cx('feedback__card-text', 'feedback__product')}>{product}</p>
+        <p className={cx('feedback__card-text', 'feedback__datePurchase')}>{datePurchase}</p>
+        <p className={cx('feedback__card-text', 'feedback__opinion')}>{opinion}</p>
+        {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
+        <img src={photoPath} alt="Product photo" />
+      </div>
+    );
+  }
+}
+
+export default FeedbackCard;

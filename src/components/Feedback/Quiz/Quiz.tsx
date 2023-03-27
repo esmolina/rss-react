@@ -3,11 +3,11 @@ import classNames from 'classnames/bind';
 import styles from './Quiz.module.scss';
 import products from '../../../dataBase/products';
 import Button from '../../Elements/Buttons/Button';
-import { QuizState } from './QuizTypes';
+import { QuizProps, QuizState } from './QuizTypes';
 
 const cx = classNames.bind(styles);
 
-class Quiz extends Component<unknown, QuizState> {
+class Quiz extends Component<QuizProps, QuizState> {
   quizRef: React.RefObject<HTMLFormElement> = React.createRef();
 
   nameRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -24,7 +24,7 @@ class Quiz extends Component<unknown, QuizState> {
 
   agreementRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-  constructor(props: unknown) {
+  constructor(props: QuizProps) {
     super(props);
     this.state = {
       userName: '',
@@ -73,7 +73,20 @@ class Quiz extends Component<unknown, QuizState> {
     return agreement;
   };
 
-  validation = () => {
+  handleClickSubmit = (event: React.MouseEvent) => {
+    event.preventDefault();
+    const newFeedbackName = this.nameRef.current?.value || '';
+    const newFeedbackDate = this.dateRef.current?.value || '';
+    const newFeedbackProduct = this.productRef.current?.value || '';
+    const newFeedbackPhoto = this.photoRef.current?.value || '';
+    let newFeedbackOpinion = '';
+    if (this.goodScoreRef.current?.checked) {
+      newFeedbackOpinion = 'good';
+    }
+    if (this.badScoreRef.current?.checked) {
+      newFeedbackOpinion = 'bad';
+    }
+
     const resultCheckName = this.nameCheck(this.nameRef.current?.value || '');
     const resultCheckDate = this.dateCheck(this.dateRef.current?.value || '');
     const resultCheckSelect = this.selectCheck(this.productRef.current?.value || '');
@@ -91,13 +104,7 @@ class Quiz extends Component<unknown, QuizState> {
       resultCheckFile &&
       resultCheckAgreement;
 
-    event.preventDefault();
-
     this.setState({
-      userName: this.nameRef.current?.value || '',
-      userDate: this.dateRef.current?.value || '',
-      userProduct: this.productRef.current?.value || '',
-      userFilePath: this.photoRef.current?.value || '',
       nameIsValid: resultCheckName,
       dateIsValid: resultCheckDate,
       productIsValid: resultCheckSelect,
@@ -107,6 +114,16 @@ class Quiz extends Component<unknown, QuizState> {
       allFormIsValid: finishResult,
       showMessage: finishResult,
     });
+
+    const newFeedback = {
+      userName: newFeedbackName,
+      product: newFeedbackProduct,
+      datePurchase: newFeedbackDate,
+      opinion: newFeedbackOpinion,
+      photoPath: newFeedbackPhoto,
+    };
+
+    this.props.handleNewFeedback(newFeedback);
   };
 
   render() {
@@ -253,7 +270,7 @@ class Quiz extends Component<unknown, QuizState> {
             customClass="button__quiz-submit"
             // eslint-disable-next-line react/jsx-boolean-value
             isSubmit={true}
-            handleSubmit={this.validation}
+            handleSubmit={this.handleClickSubmit}
           />
 
           {showMessage && (

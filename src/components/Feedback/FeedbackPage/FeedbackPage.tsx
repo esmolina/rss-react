@@ -13,10 +13,9 @@ class FeedbackPage extends Component<FeedbackPageProps> {
   }
 
   render(): React.ReactNode {
-    const { handleQuizNameInput } = this.props;
     return (
       <div className={cx('feedback__wrapper')}>
-        <Quiz handleQuizNameInput={handleQuizNameInput} />
+        <Quiz />
       </div>
     );
   }

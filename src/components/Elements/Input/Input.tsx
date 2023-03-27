@@ -16,7 +16,6 @@ class Input extends Component<InputProps> {
       inputType,
       inputValue,
       spanInfo,
-      handleInputChange,
     } = this.props;
     return (
       <div>
@@ -28,7 +27,6 @@ class Input extends Component<InputProps> {
           type={inputType}
           id={labelHtmlFor}
           value={inputValue}
-          onChange={handleInputChange}
           className={cx('input', customClassInput)}
         />
         <span className={cx('spanForInput', spanClass)}>{spanInfo}</span>

@@ -7,5 +7,4 @@ export interface InputProps {
   inputType: string;
   inputValue: string;
   spanInfo: string;
-  handleInputChange: () => void;
 }

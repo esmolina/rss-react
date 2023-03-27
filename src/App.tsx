@@ -27,11 +27,6 @@ class App extends React.Component<Record<string, never>, AppStateProps> {
     this.setState({ currentPage: pageName });
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  handleQuizNameInput = () => {
-    console.log('Test handle text input');
-  };
-
   render() {
     const { currentPage } = this.state;
     return (

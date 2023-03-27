@@ -38,7 +38,6 @@ class FeedbackPage extends Component<FeedbackPageProps, FeedbackPageState> {
       this.setState({
         feedbacks: previousFeedbacks,
       });
-      console.log(previousFeedbacks);
     };
 
     return (

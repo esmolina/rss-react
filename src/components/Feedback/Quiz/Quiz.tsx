@@ -35,7 +35,6 @@ class Quiz extends Component<QuizProps, QuizState> {
       estimateIsValid: true,
       fileCoordsIsValid: true,
       agreementIsValid: true,
-      allFormIsValid: false,
       showMessage: false,
     };
   }
@@ -87,7 +86,6 @@ class Quiz extends Component<QuizProps, QuizState> {
       estimateIsValid: true,
       fileCoordsIsValid: true,
       agreementIsValid: true,
-      allFormIsValid: false,
       showMessage: false,
     });
   };
@@ -130,7 +128,6 @@ class Quiz extends Component<QuizProps, QuizState> {
       estimateIsValid: resultCheckRadio,
       fileCoordsIsValid: resultCheckFile,
       agreementIsValid: resultCheckAgreement,
-      allFormIsValid: finishResult,
       showMessage: finishResult,
     });
 
@@ -161,7 +158,6 @@ class Quiz extends Component<QuizProps, QuizState> {
       estimateIsValid,
       fileCoordsIsValid,
       agreementIsValid,
-      allFormIsValid,
       showMessage,
     } = this.state;
 

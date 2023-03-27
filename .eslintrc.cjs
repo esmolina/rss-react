@@ -16,6 +16,7 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "react/destructuring-assignment": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

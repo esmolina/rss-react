@@ -94,3 +94,13 @@
   margin: 0 10px 10px 0;
   width: 40%;
 }
+
+.form-feel {
+  &__message {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: colors.$color-fill-right;
+    margin: 10px auto;
+  }
+}

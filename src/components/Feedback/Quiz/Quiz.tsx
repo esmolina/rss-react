@@ -27,6 +27,10 @@ class Quiz extends Component<unknown, QuizState> {
   constructor(props: unknown) {
     super(props);
     this.state = {
+      userName: '',
+      userDate: '',
+      userProduct: '',
+      userFilePath: '',
       nameIsValid: true,
       dateIsValid: true,
       productIsValid: true,
@@ -61,8 +65,8 @@ class Quiz extends Component<unknown, QuizState> {
     return result;
   };
 
-  fileCheck = (url: string) => {
-    return url.length === 0;
+  fileCheck = (filePath: string) => {
+    return filePath.length > 0;
   };
 
   agreementCheck = (agreement: boolean) => {
@@ -87,7 +91,13 @@ class Quiz extends Component<unknown, QuizState> {
       resultCheckFile &&
       resultCheckAgreement;
 
+    event.preventDefault();
+
     this.setState({
+      userName: this.nameRef.current?.value || '',
+      userDate: this.dateRef.current?.value || '',
+      userProduct: this.productRef.current?.value || '',
+      userFilePath: this.photoRef.current?.value || '',
       nameIsValid: resultCheckName,
       dateIsValid: resultCheckDate,
       productIsValid: resultCheckSelect,
@@ -103,6 +113,10 @@ class Quiz extends Component<unknown, QuizState> {
     const optionsList: Array<string> = ['not selected'];
     products.map((product) => optionsList.push(`${product.brand} - ${product.name}`));
     const {
+      userName,
+      userDate,
+      userProduct,
+      userFilePath,
       nameIsValid,
       dateIsValid,
       productIsValid,
@@ -126,6 +140,7 @@ class Quiz extends Component<unknown, QuizState> {
             placeholder="John Doe"
             className={cx('input')}
             required
+            defaultValue={userName}
           />
           {!nameIsValid && <span className={cx('input__span')}>Please, correct data</span>}
 
@@ -139,6 +154,7 @@ class Quiz extends Component<unknown, QuizState> {
             className={cx('input')}
             autoComplete="off"
             required
+            defaultValue={userDate}
           />
           {!dateIsValid && (
             <span className={cx('input__span')}>
@@ -155,7 +171,7 @@ class Quiz extends Component<unknown, QuizState> {
             name="input-select"
             id="input-quiz-select"
             className={cx('select')}
-            defaultValue=""
+            defaultValue={userProduct}
             required
           >
             {optionsList.map((option) => {
@@ -205,7 +221,12 @@ class Quiz extends Component<unknown, QuizState> {
           <label htmlFor="input-quiz-file" className={cx('label')}>
             Add photo
           </label>
-          <input ref={this.photoRef} type="file" name="input-quiz-file" />
+          <input
+            ref={this.photoRef}
+            type="file"
+            name="input-quiz-file"
+            defaultValue={userFilePath}
+          />
           {!fileCoordsIsValid && <span className={cx('input__span')}>Please, download photo</span>}
 
           <p>
@@ -234,6 +255,12 @@ class Quiz extends Component<unknown, QuizState> {
             isSubmit={true}
             handleSubmit={this.validation}
           />
+
+          {showMessage && (
+            <span className={cx('form-feel__message')}>
+              Excellent. Your review has been published
+            </span>
+          )}
         </form>
       </div>
     );

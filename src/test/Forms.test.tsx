@@ -11,10 +11,23 @@ import {
   radioCheck,
   selectCheck,
 } from '../components/Feedback/Quiz/QuizValidation';
+import { FeedbackPageState } from '../components/Feedback/FeedbackPage/FeedbackPageTypes';
 
-const testHandleNewFeedbackFieldsRender = (newFeedback: FeedbackCardProps): void => {
-  // eslint-disable-next-line no-param-reassign
-  newFeedback.userName = 'Ivan';
+const testHandleNewFeedbackFieldsRender = (newFeedback: FeedbackCardProps) => {
+  const setState: FeedbackPageState = {
+    feedbacks: [
+      {
+        userName: 'Elena',
+        product: 'Solgar - Omega3',
+        datePurchase: '01.01.2023',
+        opinion: 'good',
+        photoPath: 'img.jpg',
+      },
+    ],
+  };
+  const previousFeedbacks: Array<FeedbackCardProps> = [];
+  previousFeedbacks.push(newFeedback);
+  setState.feedbacks = previousFeedbacks;
 };
 
 describe('Form fields rendering', () => {
@@ -23,6 +36,13 @@ describe('Form fields rendering', () => {
     expect(screen.getByLabelText('My name...')).toBeInTheDocument();
     expect(screen.getByLabelText('Date of purchase...')).toBeInTheDocument();
     expect(screen.getByLabelText('I bought...')).toBeInTheDocument();
+  });
+});
+
+describe('Form fields rendering', () => {
+  it('renders form fields', () => {
+    render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
+    expect(screen.getByPlaceholderText('John Doe')).toBeInTheDocument();
   });
 });
 

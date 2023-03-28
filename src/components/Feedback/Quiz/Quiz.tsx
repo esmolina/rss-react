@@ -229,7 +229,7 @@ class Quiz extends Component<QuizProps, QuizState> {
               name="score"
               value="good"
             />
-            <label htmlFor="input-quiz-radio" className={cx('label__radio')}>
+            <label htmlFor="input-quiz-radio-good" className={cx('label__radio')}>
               Good
             </label>
           </p>
@@ -243,7 +243,7 @@ class Quiz extends Component<QuizProps, QuizState> {
               name="score"
               value="bad"
             />
-            <label htmlFor="input-quiz-radio" className={cx('label__radio')}>
+            <label htmlFor="input-quiz-radio-bad" className={cx('label__radio')}>
               Bad
             </label>
           </p>

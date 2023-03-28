@@ -2,6 +2,7 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Quiz from '../components/Feedback/Quiz/Quiz';
+import FeedbackCard from '../components/Feedback/FeedbackCard/FeedbackCard';
 import { FeedbackCardProps } from '../components/Feedback/FeedbackCard/FeedbackCardTypes';
 import {
   agreementCheck,
@@ -12,6 +13,14 @@ import {
   selectCheck,
 } from '../components/Feedback/Quiz/QuizValidation';
 import { FeedbackPageState } from '../components/Feedback/FeedbackPage/FeedbackPageTypes';
+
+const testNewFeedback = {
+  userName: 'Elena',
+  product: 'Solgar - Omega3',
+  datePurchase: '01.01.2023',
+  opinion: 'good',
+  photoPath: 'img.jpg',
+};
 
 const testHandleNewFeedbackFieldsRender = (newFeedback: FeedbackCardProps) => {
   const setState: FeedbackPageState = {
@@ -30,32 +39,42 @@ const testHandleNewFeedbackFieldsRender = (newFeedback: FeedbackCardProps) => {
   setState.feedbacks = previousFeedbacks;
 };
 
+describe('Feedback-card rendering', () => {
+  it('renders right card', () => {
+    render(
+      <FeedbackCard
+        userName={testNewFeedback.userName}
+        product={testNewFeedback.product}
+        datePurchase={testNewFeedback.datePurchase}
+        opinion={testNewFeedback.opinion}
+        photoPath={testNewFeedback.photoPath}
+      />
+    );
+    expect(screen.getByText(/Elena/)).toBeInTheDocument();
+  });
+});
+
 describe('Form fields rendering', () => {
   it('renders form fields', () => {
     render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
     expect(screen.getByLabelText('My name...')).toBeInTheDocument();
     expect(screen.getByLabelText('Date of purchase...')).toBeInTheDocument();
     expect(screen.getByLabelText('I bought...')).toBeInTheDocument();
+    expect(screen.getByLabelText('Good')).toBeInTheDocument();
+    expect(screen.getByLabelText('Bad')).toBeInTheDocument();
   });
 });
 
-describe('Form fields rendering', () => {
-  it('renders form fields', () => {
-    render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
-    expect(screen.getByPlaceholderText('John Doe')).toBeInTheDocument();
-  });
-});
-
-describe('Validation name', () => {
-  it('valid name', () => {
+describe('Validation date', () => {
+  it('valid date', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(dateCheck('01.01.2022')).toBeTruthy();
     expect(dateCheck('01.01.2000')).toBeFalsy();
   });
 });
 
-describe('Validation date', () => {
-  it('valid date', () => {
+describe('Validation name', () => {
+  it('valid name', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     expect(nameCheck('Elena')).toBeTruthy();
     expect(nameCheck('E')).toBeFalsy();

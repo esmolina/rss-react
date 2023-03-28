@@ -43,7 +43,7 @@ class FeedbackPage extends Component<FeedbackPageProps, FeedbackPageState> {
               datePurchase={feedback.datePurchase}
               opinion={feedback.opinion}
               photoPath={feedback.photoPath}
-              key={`${feedback.userName}-${feedback.datePurchase}`}
+              key={`${feedback.userName}-${feedback.datePurchase}-${feedback.product}-${feedback.opinion}`}
             />
           );
         })}

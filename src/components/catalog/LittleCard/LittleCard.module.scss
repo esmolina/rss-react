@@ -1,0 +1,75 @@
+@use '../../../stylesheets/variables/colors';
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.little-card {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid colors.$little-card-border;
+    border-radius: numbers.$border-radius;
+    color: colors.$little-card-text;
+  }
+
+  &__image {
+    width: 50%;
+    margin: 20px auto 20px;
+    border-radius: numbers.$border-radius;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: colors.$little-card-background;
+    margin: 0;
+    border-radius: 0 0 numbers.$border-radius numbers.$border-radius;
+    flex-grow: 1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  &__brand, &__name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__specifications {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__bottom.supplements {
+    background: url("../../../assets/icons/vitamins.png") no-repeat;
+  }
+
+  &__bottom.food {
+    background: url("../../../assets/icons/food.png") no-repeat;
+  }
+
+  &__bottom.beauty {
+    background: url("../../../assets/icons/beauty.png") no-repeat;
+  }
+
+  &__bottom.supplements, &__bottom.food, &__bottom.beauty {
+    background-position: right;
+  }
+
+  &__rating, &__price {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__rating {
+    color: colors.$little-card-rating;
+  }
+}

@@ -1,0 +1,32 @@
+@use '../../stylesheets/variables/colors';
+@use '../../stylesheets/mixins/mixins.scss';
+
+.footer {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  z-index: 3;
+  background: colors.$header-background-color;
+  padding: 0 20px;
+
+  &__link {
+    width: 10%;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__rs-logo {
+    width: 70%;
+  }
+
+  &__author {
+    font-size: 16px;
+  }
+
+  &__gh-logo {
+    width: 25%;
+  }
+}

@@ -4,6 +4,14 @@ import styles from './Quiz.module.scss';
 import products from '../../../dataBase/products';
 import Button from '../../Elements/Buttons/Button';
 import { QuizProps, QuizState } from './QuizTypes';
+import {
+  agreementCheck,
+  dateCheck,
+  fileCheck,
+  nameCheck,
+  radioCheck,
+  selectCheck,
+} from './QuizValidation';
 
 const cx = classNames.bind(styles);
 
@@ -39,7 +47,7 @@ class Quiz extends Component<QuizProps, QuizState> {
     };
   }
 
-  read = (callback: (base64: string) => void) => {
+  readImg = (callback: (base64: string) => void) => {
     if (this.photoRef.current && this.photoRef.current.files) {
       const file = this.photoRef.current.files.item(0);
       if (!file) return;
@@ -51,37 +59,6 @@ class Quiz extends Component<QuizProps, QuizState> {
 
       reader.readAsDataURL(file);
     }
-  };
-
-  nameCheck = (name: string) => {
-    return name.length >= 2;
-  };
-
-  dateCheck = (date: string) => {
-    return new Date(date) && new Date(date) < new Date() && new Date(date) > new Date('2020-01-01');
-  };
-
-  selectCheck = (select: string) => {
-    return select !== 'not selected';
-  };
-
-  radioCheck = (...params: Array<boolean>) => {
-    const radios = [...params];
-    let result = false;
-    let i = 0;
-    while (!result && i < radios.length) {
-      if (radios[i]) result = true;
-      i += 1;
-    }
-    return result;
-  };
-
-  fileCheck = (filePath: string) => {
-    return filePath.length > 0;
-  };
-
-  agreementCheck = (agreement: boolean) => {
-    return agreement;
   };
 
   clearForm = () => {
@@ -107,15 +84,15 @@ class Quiz extends Component<QuizProps, QuizState> {
   handleClickSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
 
-    const resultCheckName = this.nameCheck(this.nameRef.current?.value || '');
-    const resultCheckDate = this.dateCheck(this.dateRef.current?.value || '');
-    const resultCheckSelect = this.selectCheck(this.productRef.current?.value || '');
-    const resultCheckRadio = this.radioCheck(
+    const resultCheckName = nameCheck(this.nameRef.current?.value || '');
+    const resultCheckDate = dateCheck(this.dateRef.current?.value || '');
+    const resultCheckSelect = selectCheck(this.productRef.current?.value || '');
+    const resultCheckRadio = radioCheck(
       this.goodScoreRef.current?.checked as boolean,
       this.badScoreRef.current?.checked as boolean
     );
-    const resultCheckFile = this.fileCheck(this.photoRef.current?.value || '');
-    const resultCheckAgreement = this.agreementCheck(this.agreementRef.current?.checked || false);
+    const resultCheckFile = fileCheck(this.photoRef.current?.value || '');
+    const resultCheckAgreement = agreementCheck(this.agreementRef.current?.checked || false);
     const finishResult =
       resultCheckName &&
       resultCheckDate &&
@@ -158,7 +135,7 @@ class Quiz extends Component<QuizProps, QuizState> {
       this.props.handleNewFeedback(newFeedback);
     };
 
-    this.read(renderCard);
+    this.readImg(renderCard);
 
     setTimeout(this.clearForm, 3000);
   };

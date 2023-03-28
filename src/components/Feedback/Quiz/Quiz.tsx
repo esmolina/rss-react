@@ -135,9 +135,10 @@ class Quiz extends Component<QuizProps, QuizState> {
       this.props.handleNewFeedback(newFeedback);
     };
 
-    this.readImg(renderCard);
-
-    setTimeout(this.clearForm, 3000);
+    if (finishResult) {
+      this.readImg(renderCard);
+      setTimeout(this.clearForm, 3000);
+    }
   };
 
   render() {

@@ -15,6 +15,5 @@ export interface QuizState {
   estimateIsValid: boolean;
   fileCoordsIsValid: boolean;
   agreementIsValid: boolean;
-  allFormIsValid: boolean;
   showMessage: boolean;
 }

@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, getByText, render, screen } from '@testing-library/react';
 import React from 'react';
 import Quiz from '../components/Feedback/Quiz/Quiz';
 import FeedbackCard from '../components/Feedback/FeedbackCard/FeedbackCard';
@@ -63,6 +63,31 @@ describe('Form fields rendering', () => {
     expect(screen.getByLabelText('Good')).toBeInTheDocument();
     expect(screen.getByLabelText('Bad')).toBeInTheDocument();
   });
+});
+
+describe('Form input event', () => {
+  it('correct input event', () => {
+    render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
+    expect(screen.getByLabelText('My name...')).toBeInTheDocument();
+    expect(screen.getByLabelText('Date of purchase...')).toBeInTheDocument();
+    expect(screen.getByLabelText('I bought...')).toBeInTheDocument();
+    expect(screen.getByLabelText('Good')).toBeInTheDocument();
+    expect(screen.getByLabelText('Bad')).toBeInTheDocument();
+  });
+});
+
+it('Submit button', () => {
+  render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
+  const button = screen.getByText('Send feedback') as HTMLButtonElement;
+
+  fireEvent(
+    getByText(button, 'Send feedback'),
+    new MouseEvent('click', {
+      bubbles: true,
+    })
+  );
+
+  expect(button.textContent).toBe('Send feedback');
 });
 
 describe('Validation date', () => {

@@ -12,15 +12,7 @@ class FeedbackPage extends Component<FeedbackPageProps, FeedbackPageState> {
   constructor(props: FeedbackPageProps) {
     super(props);
     this.state = {
-      feedbacks: [
-        {
-          userName: 'John Doe',
-          product: 'California Gold Nutrition - Vitamin D3',
-          datePurchase: '01.01.2023',
-          opinion: 'good',
-          photoPath: 'hnjhhghyj',
-        },
-      ],
+      feedbacks: [],
     };
   }
 

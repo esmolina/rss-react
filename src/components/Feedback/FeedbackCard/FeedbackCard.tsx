@@ -27,7 +27,7 @@ class FeedbackCard extends Component<FeedbackCardProps> {
         <p className={cx('feedback__card-text', 'feedback__opinion')}>{opinion}</p>
         <p className={cx('feedback__card-text-static')}>Photo</p>
         {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-        <img src={photoPath} alt="Product photo" />
+        <img src={photoPath} alt="Product photo" className={cx('feedback__card-img')} />
       </div>
     );
   }

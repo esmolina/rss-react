@@ -39,6 +39,20 @@ class Quiz extends Component<QuizProps, QuizState> {
     };
   }
 
+  read = (callback: (base64: string) => void) => {
+    if (this.photoRef.current && this.photoRef.current.files) {
+      const file = this.photoRef.current.files.item(0);
+      if (!file) return;
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        callback(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   nameCheck = (name: string) => {
     return name.length >= 2;
   };
@@ -92,17 +106,6 @@ class Quiz extends Component<QuizProps, QuizState> {
 
   handleClickSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
-    const newFeedbackName = this.nameRef.current?.value || '';
-    const newFeedbackDate = this.dateRef.current?.value || '';
-    const newFeedbackProduct = this.productRef.current?.value || '';
-    const newFeedbackPhoto = this.photoRef.current?.value || '';
-    let newFeedbackOpinion = '';
-    if (this.goodScoreRef.current?.checked) {
-      newFeedbackOpinion = 'good';
-    }
-    if (this.badScoreRef.current?.checked) {
-      newFeedbackOpinion = 'bad';
-    }
 
     const resultCheckName = this.nameCheck(this.nameRef.current?.value || '');
     const resultCheckDate = this.dateCheck(this.dateRef.current?.value || '');
@@ -131,21 +134,38 @@ class Quiz extends Component<QuizProps, QuizState> {
       showMessage: finishResult,
     });
 
-    const newFeedback = {
-      userName: newFeedbackName,
-      product: newFeedbackProduct,
-      datePurchase: newFeedbackDate,
-      opinion: newFeedbackOpinion,
-      photoPath: newFeedbackPhoto,
+    const renderCard = (base64: string) => {
+      const newFeedbackName = this.nameRef.current?.value || '';
+      const newFeedbackDate = this.dateRef.current?.value || '';
+      const newFeedbackProduct = this.productRef.current?.value || '';
+
+      let newFeedbackOpinion = '';
+      if (this.goodScoreRef.current?.checked) {
+        newFeedbackOpinion = 'good';
+      }
+      if (this.badScoreRef.current?.checked) {
+        newFeedbackOpinion = 'bad';
+      }
+
+      const newFeedback = {
+        userName: newFeedbackName,
+        product: newFeedbackProduct,
+        datePurchase: newFeedbackDate,
+        opinion: newFeedbackOpinion,
+        photoPath: base64 || '',
+      };
+
+      this.props.handleNewFeedback(newFeedback);
     };
 
-    this.props.handleNewFeedback(newFeedback);
+    this.read(renderCard);
 
     setTimeout(this.clearForm, 3000);
   };
 
   render() {
     const optionsList: Array<string> = ['not selected'];
+
     products.map((product) => optionsList.push(`${product.brand} - ${product.name}`));
     const {
       userName,

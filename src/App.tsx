@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import products from './dataBase/products';
@@ -15,62 +15,46 @@ import {
 } from './components/About/AboutInfo';
 import HomePage from './components/HomePage/HomePage';
 import FeedbackPage from './components/Feedback/FeedbackPage/FeedbackPage';
-import { AppStateProps } from './AppTypes';
 
-class App extends React.Component<Record<string, never>, AppStateProps> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = { currentPage: '' };
-  }
+function App() {
+  const [currentPage, setCurrentPage] = useState('');
 
-  handleGoAnotherChange = (pageName: string) => {
-    this.setState({ currentPage: pageName });
+  const handleGoAnotherChange = (pageName: string) => {
+    setCurrentPage(pageName);
   };
 
-  render() {
-    const { currentPage } = this.state;
-    return (
-      <div className="App">
-        <Header currentPage={currentPage} />
-        <Routes>
-          <Route
-            path="/"
-            element={<HomePage handleGoAnotherChange={this.handleGoAnotherChange} />}
-          />
-          <Route
-            path="/catalog"
-            element={
-              <CatalogWrapper
-                productsData={products}
-                handleGoAnotherChange={this.handleGoAnotherChange}
-              />
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <About
-                companyName={companyName}
-                aboutHeader={aboutHeader}
-                productCategories={productCategories}
-                ourContacts={ourContacts}
-                handleGoAnotherChange={this.handleGoAnotherChange}
-              />
-            }
-          />
-          <Route
-            path="/feedback"
-            element={<FeedbackPage handleGoAnotherChange={this.handleGoAnotherChange} />}
-          />
-          <Route
-            path="*"
-            element={<Page404 handleGoAnotherChange={this.handleGoAnotherChange} />}
-          />
-        </Routes>
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Header currentPage={currentPage} />
+      <Routes>
+        <Route path="/" element={<HomePage handleGoAnotherChange={handleGoAnotherChange} />} />
+        <Route
+          path="/catalog"
+          element={
+            <CatalogWrapper productsData={products} handleGoAnotherChange={handleGoAnotherChange} />
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <About
+              companyName={companyName}
+              aboutHeader={aboutHeader}
+              productCategories={productCategories}
+              ourContacts={ourContacts}
+              handleGoAnotherChange={handleGoAnotherChange}
+            />
+          }
+        />
+        <Route
+          path="/feedback"
+          element={<FeedbackPage handleGoAnotherChange={handleGoAnotherChange} />}
+        />
+        <Route path="*" element={<Page404 handleGoAnotherChange={handleGoAnotherChange} />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

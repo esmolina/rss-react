@@ -1,34 +1,31 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import styles from './Page404.module.scss';
 import Button from '../Elements/Buttons/Button';
 import { Page404Props } from './Page404Types';
 
 const cx = classNames.bind(styles);
 
-class Page404 extends Component<Page404Props> {
-  componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.handleGoAnotherChange('Page not found');
-  }
+function Page404({ handleGoAnotherChange }: Page404Props) {
+  useEffect(() => {
+    handleGoAnotherChange('Page not found');
+  });
 
-  render(): React.ReactNode {
-    return (
-      <div className={cx('page404__container')}>
-        <h1 className={cx('page404__number')}>404</h1>
-        <p className={cx('page404__text')}>Oops! This page doesn`t exist..</p>
-        <Link to="/catalog" className={cx('router-link-404')}>
-          <Button
-            buttonType="button"
-            buttonText="Let's go to catalog ;)"
-            customClass="page404"
-            isSubmit={false}
-          />
-        </Link>
-      </div>
-    );
-  }
+  return (
+    <div className={cx('page404__container')}>
+      <h1 className={cx('page404__number')}>404</h1>
+      <p className={cx('page404__text')}>Oops! This page doesn`t exist..</p>
+      <Link to="/catalog" className={cx('router-link-404')}>
+        <Button
+          buttonType="button"
+          buttonText="Let's go to catalog ;)"
+          customClass="page404"
+          isSubmit={false}
+        />
+      </Link>
+    </div>
+  );
 }
 
 export default Page404;

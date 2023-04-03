@@ -13,10 +13,6 @@ module.exports = {
     "react/react-in-jsx-scope": 0,
     "import/no-extraneous-dependencies": "off",
     "react/prefer-stateless-function": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "react/destructuring-assignment": "off",
-    "class-methods-use-this": "off",
     "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

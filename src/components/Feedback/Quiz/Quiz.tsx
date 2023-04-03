@@ -141,6 +141,7 @@ function Quiz({ handleNewFeedback }: QuizProps) {
   return (
     <div className={cx('quiz__wrapper')}>
       <form>
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-name" className={cx('label')}>
           My name...
         </label>
@@ -155,6 +156,7 @@ function Quiz({ handleNewFeedback }: QuizProps) {
         />
         {!nameIsValid && <span className={cx('input__span')}>Please, correct data</span>}
 
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-date" className={cx('label')}>
           Date of purchase...
         </label>
@@ -174,6 +176,7 @@ function Quiz({ handleNewFeedback }: QuizProps) {
           </span>
         )}
 
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-select" className={cx('label')}>
           I bought...
         </label>
@@ -195,6 +198,7 @@ function Quiz({ handleNewFeedback }: QuizProps) {
         </select>
         {!productIsValid && <span className={cx('input__span')}>Please select the product</span>}
 
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-radio" className={cx('label')}>
           I think this product deserves estimation...
         </label>
@@ -208,6 +212,8 @@ function Quiz({ handleNewFeedback }: QuizProps) {
             name="score"
             value="good"
           />
+
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="input-quiz-radio-good" className={cx('label__radio')}>
             Good
           </label>
@@ -222,6 +228,8 @@ function Quiz({ handleNewFeedback }: QuizProps) {
             name="score"
             value="bad"
           />
+
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="input-quiz-radio-bad" className={cx('label__radio')}>
             Bad
           </label>
@@ -229,6 +237,7 @@ function Quiz({ handleNewFeedback }: QuizProps) {
 
         {!estimateIsValid && <span className={cx('input__span')}>Please, enter score</span>}
 
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-file" className={cx('label')}>
           Add photo
         </label>
@@ -236,6 +245,7 @@ function Quiz({ handleNewFeedback }: QuizProps) {
         {!fileCoordsIsValid && <span className={cx('input__span')}>Please, download photo</span>}
 
         <p>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="input-quiz-checkbox" className={cx('label')}>
             I agree to the processing of my data
           </label>

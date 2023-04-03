@@ -12,6 +12,7 @@ import {
   radioCheck,
   selectCheck,
 } from '../components/Feedback/Quiz/QuizValidation';
+import '@testing-library/jest-dom/extend-expect';
 
 const testNewFeedback = {
   userName: 'Elena',
@@ -61,8 +62,8 @@ describe('Form fields rendering', () => {
   });
 });
 
-describe('Form input event', () => {
-  it('correct input event', () => {
+describe('Form input in the document', () => {
+  it('correct inputs in the document', () => {
     render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
     expect(screen.getByLabelText('My name...')).toBeInTheDocument();
     expect(screen.getByLabelText('Date of purchase...')).toBeInTheDocument();
@@ -85,6 +86,26 @@ it('Submit button', () => {
 
   expect(button.textContent).toBe('Send feedback');
 });
+
+/*---------------------------*/
+
+describe('Form input event', () => {
+  it('Correct form inputs events', async () => {
+    render(<Quiz handleNewFeedback={testHandleNewFeedbackFieldsRender} />);
+    await screen.findByText(/My name.../);
+    expect(screen.queryByText(/Elena/)).toBeNull();
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'Elena' },
+    });
+
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'Elena' },
+    });
+    expect(screen.getByDisplayValue('Elena') as HTMLInputElement).toBeInTheDocument();
+  });
+});
+
+/*---------------------------*/
 
 describe('Validation date', () => {
   it('valid date', () => {

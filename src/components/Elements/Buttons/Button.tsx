@@ -5,15 +5,14 @@ import { ButtonProps } from './ButtonTypes';
 
 const cx = classNames.bind(styles);
 
-function Button({ buttonType, buttonText, customClass, isSubmit, handleSubmit }: ButtonProps) {
-  const noHandler = () => {
-    return 'is not handler';
-  };
-
-  const handler = isSubmit ? handleSubmit : noHandler;
+function Button({ buttonType, buttonText, customClass, handleSubmit }: ButtonProps) {
   return (
-    // eslint-disable-next-line react/button-has-type
-    <button type={buttonType} className={cx('button', customClass)} onClick={handler}>
+    <button
+      // eslint-disable-next-line react/button-has-type
+      type={buttonType}
+      className={cx('button', customClass)}
+      onClick={handleSubmit}
+    >
       {buttonText}
     </button>
   );

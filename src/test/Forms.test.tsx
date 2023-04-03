@@ -12,7 +12,6 @@ import {
   radioCheck,
   selectCheck,
 } from '../components/Feedback/Quiz/QuizValidation';
-import { FeedbackPageState } from '../components/Feedback/FeedbackPage/FeedbackPageTypes';
 
 const testNewFeedback = {
   userName: 'Elena',
@@ -23,20 +22,17 @@ const testNewFeedback = {
 };
 
 const testHandleNewFeedbackFieldsRender = (newFeedback: FeedbackCardProps) => {
-  const setState: FeedbackPageState = {
-    feedbacks: [
-      {
-        userName: 'Elena',
-        product: 'Solgar - Omega3',
-        datePurchase: '01.01.2023',
-        opinion: 'good',
-        photoPath: 'img.jpg',
-      },
-    ],
-  };
-  const previousFeedbacks: Array<FeedbackCardProps> = [];
-  previousFeedbacks.push(newFeedback);
-  setState.feedbacks = previousFeedbacks;
+  const feedbacks: Array<FeedbackCardProps> = [
+    {
+      userName: 'Elena',
+      product: 'Solgar - Omega3',
+      datePurchase: '01.01.2023',
+      opinion: 'good',
+      photoPath: 'img.jpg',
+    },
+  ];
+
+  feedbacks.push(newFeedback);
 };
 
 describe('Feedback-card rendering', () => {

@@ -16,14 +16,6 @@ import {
 const cx = classNames.bind(styles);
 
 function Quiz({ handleNewFeedback }: QuizProps) {
-  // const nameRef = useRef<{ value: string }>();
-  // const dateRef = useRef<{ value: string }>();
-  // const productRef = useRef<{ value: string }>();
-  // const goodScoreRef = useRef<{ checked: boolean }>();
-  // const badScoreRef = useRef<{ checked: boolean }>();
-  // const photoRef = useRef<{ files: FileList; value: string }>();
-  // const agreementRef = useRef<{ checked: boolean }>();
-
   const nameRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
   const productRef = useRef<HTMLSelectElement>(null);
@@ -267,8 +259,6 @@ function Quiz({ handleNewFeedback }: QuizProps) {
           buttonType="submit"
           buttonText="Send feedback"
           customClass="button__quiz-submit"
-          // eslint-disable-next-line react/jsx-boolean-value
-          isSubmit={true}
           handleSubmit={handleClickSubmit}
         />
 

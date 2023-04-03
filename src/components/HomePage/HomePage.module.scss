@@ -36,6 +36,7 @@
 
   &__router-link {
     z-index: numbers.$z-index-link;
+    text-decoration: none;
   }
 }
 

@@ -36,6 +36,7 @@
   }
 
   &__span {
+    display: flex;
     font-size: 18px;
     color: colors.$color-wrong-input;
     margin-left: 20px;
@@ -103,4 +104,20 @@
     color: colors.$color-fill-right;
     margin: 10px auto;
   }
+}
+
+.button__quiz-submit {
+  display: block;
+  border: 1px solid colors.$buttons-border-color;
+  border-radius: numbers.$border-radius-buttons;
+  padding: 10px 20px;
+  width: fit-content;
+  background: colors.$color-pure-white;
+  z-index: numbers.$z-index-button;
+  color: colors.$buttons-text-color;
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration: none;
+  box-shadow: 0 0 10px 5px colors.$buttons-shadow-color;
+  margin: 20px auto;
 }

@@ -13,6 +13,7 @@ module.exports = {
     "react/react-in-jsx-scope": 0,
     "import/no-extraneous-dependencies": "off",
     "react/prefer-stateless-function": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

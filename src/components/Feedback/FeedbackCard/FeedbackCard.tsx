@@ -5,7 +5,7 @@ import { FeedbackCardProps } from './FeedbackCardTypes';
 
 const cx = classNames.bind(styles);
 
-function FeedbackCard({ userName, product, datePurchase, opinion, photoPath }: FeedbackCardProps) {
+function FeedbackCard({ userName, product, datePurchase, opinion, file }: FeedbackCardProps) {
   return (
     <div
       className={cx(
@@ -25,7 +25,11 @@ function FeedbackCard({ userName, product, datePurchase, opinion, photoPath }: F
       <p className={cx('feedback__card-text', 'feedback__opinion')}>{opinion}</p>
       <p className={cx('feedback__card-text-static')}>Photo</p>
       {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-      <img src={photoPath} alt="Product photo" className={cx('feedback__card-img')} />
+      <img
+        src={URL.createObjectURL(file)}
+        alt="Product photo"
+        className={cx('feedback__card-img')}
+      />
     </div>
   );
 }

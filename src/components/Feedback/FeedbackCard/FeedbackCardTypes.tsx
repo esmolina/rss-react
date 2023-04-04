@@ -3,5 +3,5 @@ export interface FeedbackCardProps {
   product: string;
   datePurchase: string;
   opinion: string;
-  file: File;
+  file: string;
 }

@@ -4,8 +4,7 @@ import React from 'react';
 import ReactSelect from 'react-select';
 import styles from './Quiz.module.scss';
 import { FeedbackCardProps } from '../FeedbackCard/FeedbackCardTypes';
-import { QuizProps } from '../Quiz/QuizTypes';
-import { FormFields, ProductOptionsInterface } from './QuizFormTypes';
+import { FormFields, ProductOptionsInterface, QuizProps } from './QuizFormTypes';
 import { getOptionsValue, productOptionsList } from './QuizFormUtils';
 
 const cx = classNames.bind(styles);
@@ -28,8 +27,9 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
       product: `${data.product}`,
       datePurchase: getValues('date'),
       opinion: getValues('estimate'),
-      file: data.file[0],
+      file: URL.createObjectURL(data.file[0]),
     };
+    console.log(data.file[0]);
     // eslint-disable-next-line no-alert
     alert('Excellent. Your review has been published');
     handleNewFeedback(newFeedback);

@@ -19,6 +19,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
     control,
   } = useForm<FormFields>({
     mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
   });
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {

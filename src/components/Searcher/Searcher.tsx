@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Searcher.module.scss';
 import SearchIcon from '../../assets/icons/search.svg';
@@ -6,25 +6,29 @@ import SearchIcon from '../../assets/icons/search.svg';
 const cx = classNames.bind(styles);
 
 function Searcher() {
-  const [inputValue, setInputValue] = useState(localStorage.getItem('inputValue') || '');
+  const searcherRef = useRef<HTMLInputElement>(null);
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    localStorage.setItem('inputValue', inputValue);
-  });
+    const previousInputValue = localStorage.getItem('inputValue') || '';
 
-  const handleChangeInput = (eventInput: React.ChangeEvent<HTMLInputElement>) => {
-    eventInput.preventDefault();
-    setInputValue(eventInput.target.value);
-  };
+    if (searcherRef.current) {
+      const refVariable: HTMLInputElement = searcherRef.current;
+      // the variable refVariable instead just searcherRef.current is needed because the value changes synchronously. The value may change several times before rerender (Eslint react-hooks/exhaustive-deps)
+      refVariable.value = previousInputValue;
+      return () => {
+        localStorage.setItem('inputValue', refVariable.value);
+      };
+    }
+  }, []);
 
   return (
     <div className={cx('search__wrapper')}>
       <input
+        ref={searcherRef}
         type="text"
         placeholder="Search..."
         className={cx('search__input')}
-        onChange={handleChangeInput}
-        value={inputValue}
       />
       <img src={SearchIcon} alt="Search icon" className={cx('search__input-icon')} />
     </div>

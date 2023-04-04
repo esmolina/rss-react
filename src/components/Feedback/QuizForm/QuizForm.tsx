@@ -47,6 +47,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
         data-testid="quiz-name-input"
         placeholder="John Doe"
         className={cx('input')}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...register('name', { required: 'Please, correct data', minLength: 2 })}
       />
       {errors.name && (
@@ -64,6 +65,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
         id="input-quiz-date"
         className={cx('input')}
         autoComplete="off"
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...register('date', {
           required: 'Please, enter data',
           min: '01.01.2020',
@@ -111,6 +113,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
           id="input-quiz-radio-good"
           className={cx('input__radio')}
           value="good"
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('estimate', {
             required: 'Please, enter your sore',
           })}
@@ -128,6 +131,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
           id="input-quiz-radio-bad"
           className={cx('input__radio')}
           value="bad"
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('estimate', {
             required: 'Please, enter your sore',
           })}
@@ -149,6 +153,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
         type="file"
         id="input-quiz-date"
         className={cx('input')}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...register('file', {
           required: 'Please, download photo',
         })}
@@ -164,6 +169,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
           type="checkbox"
           id="input-quiz-checkbox"
           className={cx('input__checkbox')}
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('agreement', {
             required: 'Please, take your agreement',
           })}

@@ -37,41 +37,39 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
 
   return (
     <form data-testid="quiz-form" onSubmit={handleSubmit(onSubmit)} className={cx('quiz__wrapper')}>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input-quiz-name" className={cx('label')}>
+        <input
+          type="text"
+          id="input-quiz-name"
+          data-testid="quiz-name-input"
+          placeholder="John Doe"
+          className={cx('input')}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('name', { required: 'Please, correct data', minLength: 2 })}
+        />
         My name...
       </label>
-      <input
-        type="text"
-        id="input-quiz-name"
-        data-testid="quiz-name-input"
-        placeholder="John Doe"
-        className={cx('input')}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...register('name', { required: 'Please, correct data', minLength: 2 })}
-      />
       {errors.name && (
         <span data-testid="name-error-span" className={cx('input__span')}>
           Min length 2 symbols
         </span>
       )}
 
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input-quiz-date" className={cx('label')}>
+        <input
+          type="date"
+          id="input-quiz-date"
+          className={cx('input')}
+          autoComplete="off"
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('date', {
+            required: 'Please, enter data',
+            min: '01.01.2020',
+            max: new Date().toDateString(),
+          })}
+        />
         Date of purchase...
       </label>
-      <input
-        type="date"
-        id="input-quiz-date"
-        className={cx('input')}
-        autoComplete="off"
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...register('date', {
-          required: 'Please, enter data',
-          min: '01.01.2020',
-          max: new Date().toDateString(),
-        })}
-      />
       {errors.date && (
         <span className={cx('input__span')}>
           Please, correct data.The purchase cannot be earlier than 01.01.2020 and later than the
@@ -88,92 +86,83 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="input-quiz-select" className={cx('label')}>
               I bought...
+              <ReactSelect
+                id="input-quiz-select"
+                className={cx('select')}
+                placeholder=""
+                options={productOptionsList}
+                value={getOptionsValue(value)}
+                onChange={(newValue) => onChange((newValue as ProductOptionsInterface).value)}
+              />
             </label>
-            <ReactSelect
-              id="input-quiz-select"
-              className={cx('select')}
-              placeholder=""
-              options={productOptionsList}
-              value={getOptionsValue(value)}
-              onChange={(newValue) => onChange((newValue as ProductOptionsInterface).value)}
-            />
             {error && <span className={cx('input__span')}>Please select the product</span>}
           </div>
         )}
       />
 
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input-quiz-radio" className={cx('label')}>
         I think this product deserves estimation...
-      </label>
-
-      <p className={cx('input__radio')}>
-        <input
-          type="radio"
-          id="input-quiz-radio-good"
-          className={cx('input__radio')}
-          value="good"
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...register('estimate', {
-            required: 'Please, enter your sore',
-          })}
-        />
-
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-radio-good" className={cx('label__radio')}>
+          <p className={cx('input__radio')}>
+            <input
+              type="radio"
+              id="input-quiz-radio-good"
+              className={cx('input__radio')}
+              value="good"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('estimate', {
+                required: 'Please, enter your sore',
+              })}
+            />
+          </p>
           Good
         </label>
-      </p>
-
-      <p className={cx('input__radio')}>
-        <input
-          type="radio"
-          id="input-quiz-radio-bad"
-          className={cx('input__radio')}
-          value="bad"
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...register('estimate', {
-            required: 'Please, enter your sore',
-          })}
-        />
-
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-radio-bad" className={cx('label__radio')}>
+          <p className={cx('input__radio')}>
+            <input
+              type="radio"
+              id="input-quiz-radio-bad"
+              className={cx('input__radio')}
+              value="bad"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('estimate', {
+                required: 'Please, enter your sore',
+              })}
+            />
+          </p>
           Bad
         </label>
-      </p>
+      </label>
 
       {errors.estimate && <span className={cx('input__span')}>Please, enter score</span>}
 
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input-quiz-file" className={cx('label')}>
         Add photo
+        <input
+          type="file"
+          id="input-quiz-date"
+          className={cx('input')}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('file', {
+            required: 'Please, download photo',
+          })}
+        />
       </label>
-      <input
-        type="file"
-        id="input-quiz-date"
-        className={cx('input')}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...register('file', {
-          required: 'Please, download photo',
-        })}
-      />
       {errors.file && <span className={cx('input__span')}>Please, download photo</span>}
 
       <p>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="input-quiz-checkbox" className={cx('label')}>
           I agree to the processing of my data
+          <input
+            type="checkbox"
+            id="input-quiz-checkbox"
+            className={cx('input__checkbox')}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('agreement', {
+              required: 'Please, take your agreement',
+            })}
+          />
         </label>
-        <input
-          type="checkbox"
-          id="input-quiz-checkbox"
-          className={cx('input__checkbox')}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...register('agreement', {
-            required: 'Please, take your agreement',
-          })}
-        />
         {errors.agreement && (
           <span className={cx('input__span')}>
             Without your consent, we will not be able to publish a response

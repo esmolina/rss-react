@@ -29,7 +29,6 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
       opinion: getValues('estimate'),
       file: URL.createObjectURL(data.file[0]),
     };
-    console.log(data.file[0]);
     // eslint-disable-next-line no-alert
     alert('Excellent. Your review has been published');
     handleNewFeedback(newFeedback);

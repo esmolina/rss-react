@@ -25,7 +25,11 @@ function FeedbackCard({ userName, product, datePurchase, opinion, file }: Feedba
       <p className={cx('feedback__card-text', 'feedback__opinion')}>{opinion}</p>
       <p className={cx('feedback__card-text-static')}>Photo</p>
       {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-      <img src={file} alt="Product photo" className={cx('feedback__card-img')} />
+      <img
+        src={URL.createObjectURL(file)}
+        alt="Product photo"
+        className={cx('feedback__card-img')}
+      />
     </div>
   );
 }

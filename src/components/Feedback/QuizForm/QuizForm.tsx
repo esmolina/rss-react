@@ -27,7 +27,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
       product: `${data.product}`,
       datePurchase: getValues('date'),
       opinion: getValues('estimate'),
-      file: URL.createObjectURL(data.file[0]),
+      file: data.file[0],
     };
     // eslint-disable-next-line no-alert
     alert('Excellent. Your review has been published');
@@ -36,7 +36,7 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cx('quiz__wrapper')}>
+    <form data-testid="quiz-form" onSubmit={handleSubmit(onSubmit)} className={cx('quiz__wrapper')}>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input-quiz-name" className={cx('label')}>
         My name...
@@ -44,11 +44,16 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
       <input
         type="text"
         id="input-quiz-name"
+        data-testid="quiz-name-input"
         placeholder="John Doe"
         className={cx('input')}
         {...register('name', { required: 'Please, correct data', minLength: 2 })}
       />
-      {errors.name && <span className={cx('input__span')}>Min length 2 symbols</span>}
+      {errors.name && (
+        <span data-testid="name-error-span" className={cx('input__span')}>
+          Min length 2 symbols
+        </span>
+      )}
 
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="input-quiz-date" className={cx('label')}>

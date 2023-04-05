@@ -43,7 +43,6 @@ describe('Form input error message', () => {
       });
       fireEvent.submit(screen.getByTestId<HTMLFormElement>('quiz-form'));
 
-      // expect(await screen.findAllByRole('alert')).toHaveLength(1);
       expect(await screen.findByText('Min length 2 symbols')).not.toBeNull();
     }
   });

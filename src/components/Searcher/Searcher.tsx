@@ -13,7 +13,6 @@ function Searcher() {
 
     if (searcherRef.current) {
       const refVariable: HTMLInputElement = searcherRef.current;
-      // the variable refVariable instead just searcherRef.current is needed because the value changes synchronously. The value may change several times before rerender
       refVariable.value = previousInputValue;
       return () => {
         localStorage.setItem('inputValue', refVariable.value);

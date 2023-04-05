@@ -17,7 +17,6 @@ function Input({
 }: InputProps) {
   return (
     <div>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={labelHtmlFor} className={cx('label', customClassLabel)}>
         {labelText}
       </label>

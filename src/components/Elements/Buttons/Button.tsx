@@ -7,12 +7,7 @@ const cx = classNames.bind(styles);
 
 function Button({ buttonType, buttonText, customClass, handleSubmit }: ButtonProps) {
   return (
-    <button
-      // eslint-disable-next-line react/button-has-type
-      type={buttonType}
-      className={cx('button', customClass)}
-      onClick={handleSubmit}
-    >
+    <button type={buttonType} className={cx('button', customClass)} onClick={handleSubmit}>
       {buttonText}
     </button>
   );

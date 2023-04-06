@@ -5,7 +5,7 @@ import ReactSelect from 'react-select';
 import styles from './Quiz.module.scss';
 import { FeedbackCardProps } from '../FeedbackCard/FeedbackCardTypes';
 import { FormFields, ProductOptionsInterface, QuizProps } from './QuizFormTypes';
-import { getOptionsValue, productOptionsList } from './QuizFormUtils';
+import { getOptionsValue, productOptionsList, validationFileExtension } from './QuizFormUtils';
 
 const cx = classNames.bind(styles);
 
@@ -138,11 +138,16 @@ function QuizForm({ handleNewFeedback }: QuizProps) {
           id="input-quiz-date"
           className={cx('input')}
           {...register('file', {
-            required: 'Please, download photo',
+            required: 'Please, download photo. You must use .png or .jpg/.jpeg',
+            validate: validationFileExtension,
           })}
         />
       </label>
-      {errors.file && <span className={cx('input__span')}>Please, download photo</span>}
+      {errors.file && (
+        <span className={cx('input__span')}>
+          Please, download photo. You must use .png or .jpg/.jpeg
+        </span>
+      )}
 
       <p>
         <label htmlFor="input-quiz-checkbox" className={cx('label')}>

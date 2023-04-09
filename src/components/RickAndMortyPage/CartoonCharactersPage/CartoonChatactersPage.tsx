@@ -23,7 +23,7 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   }, []);
 
   return (
-    <div className={cx('catalog-wrapper')}>
+    <div className={cx('cartoon-page-wrapper')}>
       <Searcher />
       <CartoonCardsList characters={charactersList} />
     </div>

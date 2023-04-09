@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 function CartoonCardsList({ characters }: CartoonCardsListProps) {
   return (
-    <div data-testid="test-cards-list" className={cx('catalog-grid')}>
+    <div className={cx('cartoon-grid')}>
       {characters.map((character: Character) => {
         return <CartoonLittleCard character={character} key={character.id} />;
       })}

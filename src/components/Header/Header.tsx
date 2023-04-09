@@ -26,6 +26,9 @@ function Header({ currentPage }: HeaderProps) {
         <NavLink to="/feedback" className={cx('header__router-link')}>
           <li className={cx('header__nav-item')}>Feedback</li>
         </NavLink>
+        <NavLink to="/api" className={cx('header__router-link')}>
+          <li className={cx('header__nav-item')}>API</li>
+        </NavLink>
       </nav>
     </div>
   );

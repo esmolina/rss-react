@@ -1,0 +1,25 @@
+@use '../../../stylesheets/variables/colors';
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.cartoon-little-card {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid colors.$little-card-border;
+    border-radius: numbers.$border-radius;
+    color: colors.$little-card-text;
+  }
+
+  //&__image {
+  //  width: 50%;
+  //  margin: 20px auto 20px;
+  //  border-radius: numbers.$border-radius;
+  //}
+
+  &__name{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

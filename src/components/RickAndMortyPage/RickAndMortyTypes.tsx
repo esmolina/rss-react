@@ -13,6 +13,16 @@ export interface Character {
   created: string;
 }
 
+export interface APICharactersResponse {
+  info: {
+    count: number;
+    pages: number;
+    next: string;
+    prev: number;
+  };
+  results: Character[];
+}
+
 export interface CartoonCardProps {
   character: Character;
 }

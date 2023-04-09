@@ -11,6 +11,7 @@ const cx = classNames.bind(styles);
 
 function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const [charactersList, setCharactersList] = useState<Character[]>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     handleGoAnotherChange('API');
@@ -19,13 +20,14 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   useEffect(() => {
     NetworkClient.getCharacters().then((charactersData: APICharactersResponse) => {
       setCharactersList(charactersData.results);
+      setTimeout(() => setIsLoaded(true), 950);
     });
   }, []);
 
   return (
     <div className={cx('cartoon-page-wrapper')}>
       <Searcher />
-      <CartoonCardsList characters={charactersList} />
+      {!isLoaded ? <div>Is loaded...</div> : <CartoonCardsList characters={charactersList} />}
     </div>
   );
 }

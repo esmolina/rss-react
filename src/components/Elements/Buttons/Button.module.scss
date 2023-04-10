@@ -20,6 +20,13 @@
       box-shadow: 0 0 10px 5px colors.$buttons-shadow-color;
       margin: 20px auto;
     }
+
+    &__close{
+      position: absolute;
+      box-shadow: none;
+      top: 0;
+      right: 0;
+    }
 }
 
 .page404 {

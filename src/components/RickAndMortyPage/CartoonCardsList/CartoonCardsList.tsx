@@ -7,11 +7,17 @@ import CartoonLittleCard from '../LittleCard/CartoonLittleCard';
 
 const cx = classNames.bind(styles);
 
-function CartoonCardsList({ characters }: CartoonCardsListProps) {
+function CartoonCardsList({ characters, cardClickHandler }: CartoonCardsListProps) {
   return (
     <div className={cx('cartoon-grid')}>
       {characters.map((character: Character) => {
-        return <CartoonLittleCard character={character} key={character.id} />;
+        return (
+          <CartoonLittleCard
+            character={character}
+            cardClickHandler={cardClickHandler}
+            key={character.id}
+          />
+        );
       })}
     </div>
   );

@@ -1,6 +1,6 @@
 import { Character } from '../RickAndMortyTypes';
 
-export interface CartoonCardsListProps {
-  characters: Array<Character>;
+export interface CartoonLittleCardProps {
+  character: Character;
   cardClickHandler: (id: number) => void;
 }

@@ -16,7 +16,7 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   // ToDo remove
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     handleGoAnotherChange('API');
@@ -25,16 +25,31 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   useEffect(() => {
     NetworkClient.getCharacters().then((charactersData: APICharactersResponse) => {
       setCharactersList(charactersData.results);
-      // ToDo remove
-      setSelectedCharacter(charactersData.results[0]);
       setTimeout(() => setIsLoaded(true), 950);
     });
   }, []);
 
+  const clickLittleCardHandler = (id: number) => {
+    NetworkClient.getCharacters().then((charactersData: APICharactersResponse) => {
+      setCharactersList(charactersData.results);
+      const allCharacters = charactersData.results;
+      const calledCharacter = allCharacters.find((item) => item.id === id);
+      if (calledCharacter) {
+        setSelectedCharacter(calledCharacter);
+      }
+      setTimeout(() => setIsLoaded(true), 950);
+    });
+    setShowModal(true);
+  };
+
   return (
     <div className={cx('cartoon-page-wrapper')}>
       <Searcher />
-      {!isLoaded ? <div>Is loaded...</div> : <CartoonCardsList characters={charactersList} />}
+      {!isLoaded ? (
+        <div>Is loaded...</div>
+      ) : (
+        <CartoonCardsList characters={charactersList} cardClickHandler={clickLittleCardHandler} />
+      )}
       {isLoaded && showModal && selectedCharacter && portal && (
         <ModalPortal character={selectedCharacter} setShowModal={setShowModal} container={portal} />
       )}

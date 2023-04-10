@@ -12,6 +12,7 @@ const cx = classNames.bind(styles);
 function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const [charactersList, setCharactersList] = useState<Character[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   useEffect(() => {
     handleGoAnotherChange('API');

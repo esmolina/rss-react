@@ -1,3 +1,8 @@
+export interface Coords {
+  name: string;
+  url: string;
+}
+
 export interface Character {
   id: number;
   name: string;
@@ -5,8 +10,8 @@ export interface Character {
   species: string;
   type: string;
   gender: string;
-  origin: object;
-  location: object;
+  origin: Coords;
+  location: Coords;
   image: string;
   episode: Array<string>;
   url: string;

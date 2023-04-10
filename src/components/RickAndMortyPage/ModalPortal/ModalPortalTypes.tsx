@@ -1,6 +1,8 @@
 import { Character } from '../RickAndMortyTypes';
+import React from 'react';
 
 export interface ModalPortalProps {
   character: Character;
-  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  container: HTMLDivElement;
 }

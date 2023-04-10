@@ -4,17 +4,20 @@
 
 .cartoon-big-card {
   &__wrapper {
-    position: relative;
     display: flex;
     flex-direction: column;
     border: 2px solid colors.$little-card-border;
     border-radius: numbers.$border-radius;
     width: 50%;
     padding: 10px;
+    background: colors.$color-pure-white;
+    margin-top: 100px;
+    margin-bottom: 300px;
   }
 
   &__image {
-    width: 100%;
+    width: 50%;
+    margin: 0 auto;
   }
 
   &__title {

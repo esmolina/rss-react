@@ -28,7 +28,11 @@ function Searcher({ handleSubmitSearch }: SearcherProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cx('search__wrapper')}>
+    <form
+      data-testid="search-form"
+      onSubmit={handleSubmit(onSubmit)}
+      className={cx('search__wrapper')}
+    >
       <input
         type="text"
         id="input-search"

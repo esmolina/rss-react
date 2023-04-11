@@ -24,9 +24,10 @@
     &__close{
       position: absolute;
       box-shadow: none;
-      top: 100px;
-      right: 120px;
+      top: 0px;
+      right: 25%;
       background: colors.$button-close-background-color;
+      margin-top: 50px;
     }
 }
 

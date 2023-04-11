@@ -1,0 +1,24 @@
+@use '../../../stylesheets/variables/colors';
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.modal-portal {
+  &__wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    background: colors.$color-modal-background;
+    justify-content: center;
+    align-items: center;
+    z-index: numbers.$z-index-modal;
+  }
+  &__wrapper_is-loaded {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

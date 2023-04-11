@@ -1,0 +1,40 @@
+@use '../../stylesheets/variables/colors';
+@use '../../stylesheets/variables/numbers';
+@use '../../stylesheets/mixins/mixins.scss';
+
+.search {
+  svg path {
+    stroke: colors.$little-card-rating;
+  }
+
+  &__input-icon {
+    width: 20px;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 40%;
+    border: 1px solid colors.$searcher-border-color;
+    border-radius: numbers.$border-radius-searcher;
+    color: colors.$primary-text-color;
+    margin: 15px auto;
+    padding: 5px 10px;
+  }
+
+  &__input {
+    display: flex;
+    background: colors.$color-pure-white;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 5px;
+    border: none;
+    width: 95%;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

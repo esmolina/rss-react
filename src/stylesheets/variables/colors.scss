@@ -1,0 +1,54 @@
+//common
+$color-pure-white: rgb(252, 252, 252);
+$color-pure-black: rgb(0, 0, 0);
+$primary-text-color: rgb(1, 42, 9);
+$primary-text-border: rgb(1, 77, 16, 0.3);
+
+
+//header
+$header-background-color: rgb(95, 168, 132);
+$header-current-page-color: rgb(119, 48, 132);
+$header-title-gradient: linear-gradient(45deg, #780662 33%, #8150a1 66%, #4a48c0);
+
+//little-card
+$little-card-border: rgba(27, 118, 72, 0.2);
+$little-card-text: rgb(0, 39, 7);
+$little-card-background: rgba(36, 154, 95, 0.2);
+$little-card-rating: rgb(99, 47, 65);
+
+//big-card
+$big-card-info-text: rgb(1, 5, 142);
+
+//404
+$page-404-text: rgb(2, 70, 15);
+$page-404-text-background: rgb(252, 252, 252, 1);
+
+//buttons
+$buttons-border-color: rgba(59, 177, 118, 0.3);
+$buttons-shadow-color: rgba(141, 175, 157, 0.8);
+$buttons-text-color: rgb(23, 159, 28);
+$buttons-background-color: rgba(175, 216, 212, 0.8);
+$button-close-background-color: rgba(255, 180, 186, 0.8);
+
+//searcher
+$searcher-icon-color: rgba(132, 140, 136);
+$searcher-border-color: rgb(41, 120, 81);
+
+//about
+$color-about-background: rgba(1, 177, 36, 0.1);
+
+//quiz
+$color-empty-input: rgba(61, 70, 63, 0.5);
+$color-right-input: rgb(28, 199, 89);
+$color-wrong-input: rgb(220, 67, 79);
+$color-error-message-input: rgb(193, 7, 19);
+$color-quiz-background: linear-gradient(rgba(201, 247, 224, 0.8), rgba(114, 217, 165, 0.8));
+$color-fill-right: rgb(2, 12, 146);
+
+//feedback
+$color-feedback-background-good: rgba(245, 85, 104, 0.3);
+$color-feedback-background-bad: rgba(108, 79, 220, 0.3);
+$color-feedback-background-text: rgba(255, 255, 255, 0.3);
+
+//modal-window
+$color-modal-background: rgba(186, 189, 188, 0.9);

@@ -1,0 +1,41 @@
+@use '../../../stylesheets/variables/colors';
+@use '../../../stylesheets/variables/numbers';
+@use '../../../stylesheets/mixins/mixins.scss';
+
+.cartoon-big-card {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid colors.$little-card-border;
+    border-radius: numbers.$border-radius;
+    width: 50%;
+    padding: 10px;
+    background: colors.$color-pure-white;
+    margin: 100px auto 300px;
+  }
+
+  &__image {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 24px;
+    color: colors.$big-card-info-text;
+  }
+
+  &__info-block {
+    font-size: 18px;
+    color: colors.$color-pure-black;
+    margin-bottom: 5px;
+    padding: 0;
+  }
+
+  &__info-title {
+    font-size: 18px;
+    color: colors.$big-card-info-text;
+    text-decoration: underline;
+  }
+}

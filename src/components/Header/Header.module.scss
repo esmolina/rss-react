@@ -1,0 +1,72 @@
+@use '../../stylesheets/variables/colors';
+@use '../../stylesheets/variables/numbers';
+@use '../../stylesheets/mixins/mixins.scss';
+
+.header {
+  background-color: colors.$header-background-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0;
+
+  &__title {
+    font-style: italic;
+    font-size: 24px;
+    text-transform: uppercase;
+    background: colors.$header-title-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__current-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__current-page-static {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__current-page-dynamic {
+    color: colors.$header-current-page-color;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__nav-item{
+    position: relative;
+    text-decoration: none;
+    list-style-type: none;
+    margin-left: 20px;
+    font-size: 18px;
+    z-index: numbers.$z-index-button;
+  }
+
+  &__router-link {
+    color: colors.$primary-text-color;
+    text-decoration: none;
+    z-index: numbers.$z-index-link;
+  }
+
+  &__router-link:hover {
+    color: colors.$header-current-page-color;
+  }
+
+  &__router-link:active{
+    color: colors.$header-current-page-color;
+  }
+}
+
+a.active {
+  color: colors.$header-current-page-color;
+}
+

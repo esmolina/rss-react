@@ -18,7 +18,20 @@ export class NetworkClientMethods {
     }
   };
 
-  public getFiltredForNameCharacter = async (name: string) => {
+  public getSelectedCharacter = async (id: number) => {
+    try {
+      const response = await HttpClient.get(`${Path.characters}/${id}`);
+
+      if (response.ok) {
+        return await response.json();
+      }
+      throw new Error(`${response.status}`);
+    } catch (error) {
+      console.error(`Something went wrong about getting selected character: ${error}`);
+    }
+  };
+
+  public getFiltredForNameCharacters = async (name: string) => {
     try {
       const response = await HttpClient.get(`${Path.characters}/?name=${name}`);
 
@@ -27,7 +40,7 @@ export class NetworkClientMethods {
       }
       throw new Error(`${response.status}`);
     } catch (error) {
-      console.error(`Something went wrong about getting characters: ${error}`);
+      console.error(`Something went wrong about getting filtred characters: ${error}`);
     }
   };
 }

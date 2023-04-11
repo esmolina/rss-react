@@ -29,12 +29,9 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   }, []);
 
   const clickLittleCardHandler = (id: number) => {
-    NetworkClient.getCharacters().then((charactersData: APICharactersResponse) => {
-      setCharactersList(charactersData.results);
-      const allCharacters = charactersData.results;
-      const calledCharacter = allCharacters.find((item) => item.id === id);
-      if (calledCharacter) {
-        setSelectedCharacter(calledCharacter);
+    NetworkClient.getSelectedCharacter(id).then((selectedCharacter: Character) => {
+      if (selectedCharacter) {
+        setSelectedCharacter(selectedCharacter);
       }
       setTimeout(() => setIsLoaded(true), 950);
     });
@@ -42,7 +39,7 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   };
 
   const submitSearchInput = (inputValue: string) => {
-    NetworkClient.getFiltredForNameCharacter(inputValue).then(
+    NetworkClient.getFiltredForNameCharacters(inputValue).then(
       (filtredCharacter: APICharactersResponse) => {
         if (filtredCharacter) {
           setCharactersList(filtredCharacter.results);

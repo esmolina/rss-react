@@ -17,6 +17,19 @@ export class NetworkClientMethods {
       console.error(`Something went wrong about getting characters: ${error}`);
     }
   };
+
+  public getFiltredForNameCharacter = async (name: string) => {
+    try {
+      const response = await HttpClient.get(`${Path.characters}/?name=${name}`);
+
+      if (response.ok) {
+        return await response.json();
+      }
+      throw new Error(`${response.status}`);
+    } catch (error) {
+      console.error(`Something went wrong about getting characters: ${error}`);
+    }
+  };
 }
 
 export const NetworkClient = new NetworkClientMethods();

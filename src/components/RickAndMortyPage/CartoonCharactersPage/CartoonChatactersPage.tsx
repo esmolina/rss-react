@@ -14,7 +14,6 @@ const portal = document.getElementById('portal') as HTMLDivElement;
 function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const [charactersList, setCharactersList] = useState<Character[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  // ToDo remove
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -42,9 +41,20 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
     setShowModal(true);
   };
 
+  const submitSearchInput = (inputValue: string) => {
+    NetworkClient.getFiltredForNameCharacter(inputValue).then(
+      (filtredCharacter: APICharactersResponse) => {
+        if (filtredCharacter) {
+          setCharactersList(filtredCharacter.results);
+          setTimeout(() => setIsLoaded(true), 950);
+        }
+      }
+    );
+  };
+
   return (
     <div className={cx('cartoon-page-wrapper')}>
-      <Searcher />
+      <Searcher handleSubmitSearch={submitSearchInput} />
       {!isLoaded ? (
         <div>Is loaded...</div>
       ) : (

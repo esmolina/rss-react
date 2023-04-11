@@ -1,3 +1,7 @@
-export interface SearcherState {
-  inputValue: string;
+export interface SearcherProps {
+  handleSubmitSearch: (inputValue: string) => void;
+}
+
+export interface SearchFormFields {
+  searchRequest: string;
 }

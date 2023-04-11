@@ -38,9 +38,12 @@ export class NetworkClientMethods {
       if (response.ok) {
         return await response.json();
       }
-      throw new Error(`${response.status}`);
+
+      if (response.status === 404) {
+        alert('Such a character has not been found. Please enter a different name');
+      }
     } catch (error) {
-      console.error(`Something went wrong about getting filtred characters: ${error}`);
+      console.error(`Something went wrong about getting selected character: ${error}`);
     }
   };
 }

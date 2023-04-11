@@ -22,10 +22,21 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   });
 
   useEffect(() => {
-    NetworkClient.getCharacters().then((charactersData: APICharactersResponse) => {
-      setCharactersList(charactersData.results);
-      setTimeout(() => setIsLoaded(true), 950);
-    });
+    const inputSavedValue = localStorage.getItem('inputValue') || '';
+    if (inputSavedValue) {
+      NetworkClient.getFiltredForNameCharacters(inputSavedValue).then(
+        (charactersData: APICharactersResponse) => {
+          setCharactersList(charactersData.results);
+          setTimeout(() => setIsLoaded(true), 950);
+        }
+      );
+    }
+    if (!inputSavedValue) {
+      NetworkClient.getCharacters().then((charactersData: APICharactersResponse) => {
+        setCharactersList(charactersData.results);
+        setTimeout(() => setIsLoaded(true), 950);
+      });
+    }
   }, []);
 
   const clickLittleCardHandler = (id: number) => {

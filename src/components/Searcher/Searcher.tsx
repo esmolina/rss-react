@@ -6,9 +6,19 @@ import { SearcherProps, SearchFormFields } from './SearcherTypes';
 
 const cx = classNames.bind(styles);
 
+interface DefaultValues {
+  searchRequest: string;
+}
+
 function Searcher({ handleSubmitSearch }: SearcherProps) {
-  const { register, handleSubmit, getValues } = useForm<SearchFormFields>({
+  const inputSavedValue = localStorage.getItem('inputValue') || '';
+  const defaultValues: DefaultValues = {
+    searchRequest: inputSavedValue,
+  };
+
+  const { register, handleSubmit, getValues, reset } = useForm<SearchFormFields>({
     mode: 'onSubmit',
+    defaultValues,
   });
 
   const onSubmit: SubmitHandler<SearchFormFields> = (data) => {
@@ -25,7 +35,7 @@ function Searcher({ handleSubmitSearch }: SearcherProps) {
         data-testid="quiz-name-input"
         placeholder="Search...(enter character name)"
         className={cx('search__input')}
-        {...register('searchRequest', { required: 'Please, correct data', minLength: 2 })}
+        {...register('searchRequest')}
       />
     </form>
   );

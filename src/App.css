@@ -2,3 +2,10 @@
   margin: 0 auto;
   height: 100%;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+}

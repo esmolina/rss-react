@@ -6,13 +6,14 @@
   &__wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border: 2px solid colors.$little-card-border;
     border-radius: numbers.$border-radius;
     width: 50%;
     padding: 10px;
     background: colors.$color-pure-white;
-    margin-top: 100px;
-    margin-bottom: 300px;
+    margin: 100px auto 300px;
   }
 
   &__image {

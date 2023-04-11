@@ -7,6 +7,7 @@ import { CartoonPageProps } from './CartoonCharactersPageTypes';
 import Searcher from '../../Searcher/Searcher';
 import CartoonCardsList from '../CartoonCardsList/CartoonCardsList';
 import ModalPortal from '../ModalPortal/ModalPortal';
+import Loader from '../../Elements/Loader/Loader';
 
 const cx = classNames.bind(styles);
 const portal = document.getElementById('portal') as HTMLDivElement;
@@ -16,6 +17,7 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [isLoadedModal, setIsLoadedModal] = useState(false);
 
   useEffect(() => {
     handleGoAnotherChange('API');
@@ -28,11 +30,11 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
         (charactersData: APICharactersResponse | string) => {
           if (typeof charactersData === 'string') {
             setCharactersList([]);
-            setTimeout(() => setIsLoaded(true), 950);
+            setTimeout(() => setIsLoaded(true), 2000);
           }
           if (typeof charactersData !== 'string') {
             setCharactersList(charactersData.results);
-            setTimeout(() => setIsLoaded(true), 950);
+            setTimeout(() => setIsLoaded(true), 2000);
           }
         }
       );
@@ -46,9 +48,12 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   }, []);
 
   const clickLittleCardHandler = (id: number) => {
+    setIsLoadedModal(false);
+    setShowModal(true);
     NetworkClient.getSelectedCharacter(id).then((selectedCharacter: Character) => {
       if (selectedCharacter) {
         setSelectedCharacter(selectedCharacter);
+        setTimeout(() => setIsLoadedModal(true), 900);
       }
     });
     setShowModal(true);
@@ -70,12 +75,17 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
     <div className={cx('cartoon-page-wrapper')}>
       <Searcher handleSubmitSearch={submitSearchInput} />
       {!isLoaded ? (
-        <div>Is loaded...</div>
+        <Loader />
       ) : (
         <CartoonCardsList characters={charactersList} cardClickHandler={clickLittleCardHandler} />
       )}
-      {isLoaded && showModal && selectedCharacter && portal && (
-        <ModalPortal character={selectedCharacter} setShowModal={setShowModal} container={portal} />
+      {showModal && selectedCharacter && portal && (
+        <ModalPortal
+          character={selectedCharacter}
+          setShowModal={setShowModal}
+          container={portal}
+          isLoadedModal={isLoadedModal}
+        />
       )}
     </div>
   );

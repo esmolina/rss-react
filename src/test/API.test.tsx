@@ -7,10 +7,6 @@ import { mockGet } from 'vi-fetch';
 import { NetworkClient } from '../API/NetworkClient/NetworkClient';
 import { APICharactersResponse } from '../components/RickAndMortyPage/RickAndMortyTypes';
 
-const fakeGoAnotherChange = (pageName: string) => {
-  console.log('handler');
-};
-
 const submitSearchInput = (inputValue: string) => {
   NetworkClient.getFiltredForNameCharacters(inputValue).then(
     (filtredCharacter: APICharactersResponse) => {
@@ -405,7 +401,7 @@ describe('API request filtred characters from searcher', () => {
 
 describe('API request all characters from searcher', () => {
   test('API request all characters from searcher is correct', () => {
-    render(<Searcher handleSubmitSearch={fakeGoAnotherChange} />);
+    render(<Searcher handleSubmitSearch={submitSearchInput} />);
     const input: HTMLInputElement = screen.getByPlaceholderText('Search...(enter character name)');
     const form: HTMLFormElement = screen.getByTestId('search-form');
     fireEvent.change(input, {

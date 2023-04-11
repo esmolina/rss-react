@@ -39,7 +39,7 @@ export class NetworkClientMethods {
         return await response.json();
       }
       if (response.status === 404) {
-        return '404';
+        return null;
       }
       if (!response.ok && response.status !== 404) {
         throw new Error(`${response.status}`);

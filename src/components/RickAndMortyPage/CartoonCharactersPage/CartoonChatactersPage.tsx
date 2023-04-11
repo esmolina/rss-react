@@ -27,14 +27,14 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
     const inputSavedValue = localStorage.getItem('inputValue') || '';
     if (inputSavedValue) {
       NetworkClient.getFiltredForNameCharacters(inputSavedValue).then(
-        (charactersData: APICharactersResponse | string) => {
-          if (typeof charactersData === 'string') {
+        (filtredCharacter: APICharactersResponse | null) => {
+          if (!filtredCharacter) {
             setCharactersList([]);
-            setTimeout(() => setIsLoaded(true), 2000);
+            setTimeout(() => setIsLoaded(true), 950);
           }
-          if (typeof charactersData !== 'string') {
-            setCharactersList(charactersData.results);
-            setTimeout(() => setIsLoaded(true), 2000);
+          if (filtredCharacter) {
+            setCharactersList(filtredCharacter.results);
+            setTimeout(() => setIsLoaded(true), 950);
           }
         }
       );
@@ -62,7 +62,11 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const submitSearchInput = (inputValue: string) => {
     setIsLoaded(false);
     NetworkClient.getFiltredForNameCharacters(inputValue).then(
-      (filtredCharacter: APICharactersResponse) => {
+      (filtredCharacter: APICharactersResponse | null) => {
+        if (!filtredCharacter) {
+          setCharactersList([]);
+          setTimeout(() => setIsLoaded(true), 950);
+        }
         if (filtredCharacter) {
           setCharactersList(filtredCharacter.results);
           setTimeout(() => setIsLoaded(true), 950);

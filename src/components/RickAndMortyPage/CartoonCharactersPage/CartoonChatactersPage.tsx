@@ -25,9 +25,15 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
     const inputSavedValue = localStorage.getItem('inputValue') || '';
     if (inputSavedValue) {
       NetworkClient.getFiltredForNameCharacters(inputSavedValue).then(
-        (charactersData: APICharactersResponse) => {
-          setCharactersList(charactersData.results);
-          setTimeout(() => setIsLoaded(true), 950);
+        (charactersData: APICharactersResponse | string) => {
+          if (typeof charactersData === 'string') {
+            setCharactersList([]);
+            setTimeout(() => setIsLoaded(true), 950);
+          }
+          if (typeof charactersData !== 'string') {
+            setCharactersList(charactersData.results);
+            setTimeout(() => setIsLoaded(true), 950);
+          }
         }
       );
     }

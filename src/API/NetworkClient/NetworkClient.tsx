@@ -38,9 +38,11 @@ export class NetworkClientMethods {
       if (response.ok) {
         return await response.json();
       }
-
       if (response.status === 404) {
-        alert('Such a character has not been found. Please enter a different name');
+        return '404';
+      }
+      if (!response.ok && response.status !== 404) {
+        throw new Error(`${response.status}`);
       }
     } catch (error) {
       console.error(`Something went wrong about getting selected character: ${error}`);

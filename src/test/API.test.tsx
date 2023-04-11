@@ -4,13 +4,26 @@ import '@testing-library/jest-dom/extend-expect';
 import Searcher from '../components/Searcher/Searcher';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { mockGet } from 'vi-fetch';
+import { NetworkClient } from '../API/NetworkClient/NetworkClient';
+import { APICharactersResponse } from '../components/RickAndMortyPage/RickAndMortyTypes';
 
-const fakeHandle = () => {
-  console.log('test');
+const fakeGoAnotherChange = (pageName: string) => {
+  console.log('handler');
 };
+
+const submitSearchInput = (inputValue: string) => {
+  NetworkClient.getFiltredForNameCharacters(inputValue).then(
+    (filtredCharacter: APICharactersResponse) => {
+      if (filtredCharacter) {
+        console.log('get response');
+      }
+    }
+  );
+};
+
 describe('API request filtred characters from searcher', () => {
   test('API request filtred characters from searcher is correct', () => {
-    render(<Searcher handleSubmitSearch={fakeHandle} />);
+    render(<Searcher handleSubmitSearch={submitSearchInput} />);
     const input: HTMLInputElement = screen.getByPlaceholderText('Search...(enter character name)');
     const form: HTMLFormElement = screen.getByTestId('search-form');
     fireEvent.change(input, {
@@ -392,7 +405,7 @@ describe('API request filtred characters from searcher', () => {
 
 describe('API request all characters from searcher', () => {
   test('API request all characters from searcher is correct', () => {
-    render(<Searcher handleSubmitSearch={fakeHandle} />);
+    render(<Searcher handleSubmitSearch={fakeGoAnotherChange} />);
     const input: HTMLInputElement = screen.getByPlaceholderText('Search...(enter character name)');
     const form: HTMLFormElement = screen.getByTestId('search-form');
     fireEvent.change(input, {

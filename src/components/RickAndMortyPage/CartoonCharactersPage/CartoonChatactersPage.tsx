@@ -50,12 +50,12 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
       if (selectedCharacter) {
         setSelectedCharacter(selectedCharacter);
       }
-      setTimeout(() => setIsLoaded(true), 950);
     });
     setShowModal(true);
   };
 
   const submitSearchInput = (inputValue: string) => {
+    setIsLoaded(false);
     NetworkClient.getFiltredForNameCharacters(inputValue).then(
       (filtredCharacter: APICharactersResponse) => {
         if (filtredCharacter) {

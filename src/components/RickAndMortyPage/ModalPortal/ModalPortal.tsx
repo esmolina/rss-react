@@ -11,10 +11,16 @@ const cx = classNames.bind(styles);
 
 const ModalPortal = ({ character, setShowModal, container, isLoadedModal }: ModalPortalProps) => {
   if (!container) return null;
+
   return ReactDOM.createPortal(
     <div className={cx('modal-portal__wrapper')}>
       {isLoadedModal && (
-        <div className={cx('modal-portal__wrapper_is-loaded')}>
+        <div
+          className={cx('modal-portal__wrapper_is-loaded')}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setShowModal(false);
+          }}
+        >
           <CartoonBigCard character={character} />
           <Button
             buttonType="button"

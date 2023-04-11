@@ -16,12 +16,12 @@ function Searcher({ handleSubmitSearch }: SearcherProps) {
     searchRequest: inputSavedValue,
   };
 
-  const { register, handleSubmit, getValues, reset } = useForm<SearchFormFields>({
+  const { register, handleSubmit, getValues } = useForm<SearchFormFields>({
     mode: 'onSubmit',
     defaultValues,
   });
 
-  const onSubmit: SubmitHandler<SearchFormFields> = (data) => {
+  const onSubmit: SubmitHandler<SearchFormFields> = () => {
     const inputSubmitValue = getValues('searchRequest');
     handleSubmitSearch(inputSubmitValue);
     localStorage.setItem('inputValue', inputSubmitValue);

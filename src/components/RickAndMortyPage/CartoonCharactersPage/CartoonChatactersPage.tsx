@@ -6,20 +6,22 @@ import { CartoonPageProps } from './CartoonCharactersPageTypes';
 import { useAppDispatch, useAppSelector } from '../../../customHooks/reduxStoreHooks';
 import { fetchCharacters } from '../../../store/reducers/ActionCreators';
 import CartoonCardsList from '../CartoonCardsList/CartoonCardsList';
+import Loader from '../../Elements/Loader/Loader';
+import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 
 const cx = classNames.bind(styles);
 const portal = document.getElementById('portal') as HTMLDivElement;
 
 function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const dispatch = useAppDispatch();
-  const { searchResponse } = useAppSelector((state) => state.searchReducer);
+  const { searchResponse, isLoaded, error } = useAppSelector((state) => state.searchReducer);
 
   useEffect(() => {
     dispatch(fetchCharacters('Morty'));
   }, []);
 
   const [charactersList, setCharactersList] = useState<Character[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  // const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [isLoadedModal, setIsLoadedModal] = useState(false);
@@ -101,6 +103,8 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
       {/*  />*/}
       {/*)}*/}
 
+      {isLoaded && <Loader />}
+      {error && <NotFoundMessage />}
       {searchResponse && (
         <CartoonCardsList
           characters={searchResponse.results}

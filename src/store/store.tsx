@@ -3,7 +3,7 @@ import searchReducer from './reducers/SearchSlice/SearchSlice';
 import { charactersAPI } from './services/CharactersService';
 
 export const rootReducer = combineReducers({
-  searchReducer,
+  searchReducer: searchReducer,
   [charactersAPI.reducerPath]: charactersAPI.reducer,
 });
 
@@ -13,3 +13,5 @@ export const manageStore = () => {
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(charactersAPI.middleware),
   });
 };
+
+export const store = manageStore();

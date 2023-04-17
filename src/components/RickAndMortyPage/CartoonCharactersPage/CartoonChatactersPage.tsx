@@ -6,9 +6,10 @@ import { CartoonPageProps } from './CartoonCharactersPageTypes';
 import { useAppDispatch, useAppSelector } from '../../../customHooks/reduxStoreHooks';
 import CartoonCardsList from '../CartoonCardsList/CartoonCardsList';
 import Loader from '../../Elements/Loader/Loader';
-import { charactersAPI } from '../../../store/services/CharactersService';
 import Searcher from '../../Searcher/Searcher';
 import { SearchSlice } from '../../../store/reducers/SearchSlice/SearchSlice';
+import { useGetSearchedCharactersQuery } from '../../../store/services/CharactersService';
+import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 
 const cx = classNames.bind(styles);
 const portal = document.getElementById('portal') as HTMLDivElement;
@@ -18,14 +19,14 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const { searchRequest } = useAppSelector((state) => state.searchReducer);
   const { setStoreSearchValue } = SearchSlice.actions;
 
-  const { data: fetchedAllCharacters, isLoading } = charactersAPI.useGetAllCharactersQuery();
-
-  const { data: fetchedSearchCharacters } = charactersAPI.useGetSearchedCharactersQuery(
-    `${searchRequest}`
-  );
+  const {
+    data: fetchedSearchCharacters,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useGetSearchedCharactersQuery(searchRequest);
 
   const [charactersList, setCharactersList] = useState<Character[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [isLoadedModal, setIsLoadedModal] = useState(false);
@@ -34,45 +35,23 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
     handleGoAnotherChange('API');
   });
 
-  useEffect(() => {
-    if (!searchRequest.length && fetchedAllCharacters) {
-      setCharactersList(fetchedAllCharacters.results);
-      setTimeout(() => setIsLoaded(true), 950);
-    }
-    if (searchRequest.length && fetchedSearchCharacters) {
-      setCharactersList(fetchedSearchCharacters.results);
-      setTimeout(() => setIsLoaded(true), 950);
-    }
-  });
-
+  // useEffect(() => {
+  //   if (!searchRequest.length && fetchedAllCharacters) {
+  //     setCharactersList(fetchedAllCharacters.results);
+  //     setTimeout(() => setIsLoaded(true), 950);
+  //   }
+  //   if (searchRequest.length && fetchedSearchCharacters) {
+  //     setCharactersList(fetchedSearchCharacters.results);
+  //     setTimeout(() => setIsLoaded(true), 950);
+  //   }
+  // }, []);
+  //
   const clickLittleCardHandler = (id: number) => {
     console.log('1');
   };
 
-  const CheckSearchValue = (testedValue: string) => {
-    const { data: fetchedCharacters } = charactersAPI.useGetSearchedCharactersQuery(
-      `${testedValue}`
-    );
-
-    if (testedValue) {
-      if (fetchedCharacters) {
-        setCharactersList(fetchedCharacters.results);
-        setTimeout(() => setIsLoaded(true), 950);
-      }
-
-      if (!fetchedCharacters) {
-        setCharactersList([]);
-        setTimeout(() => setIsLoaded(true), 950);
-      }
-    }
-    if (!testedValue) {
-      const { data: fetchedCharacters } = charactersAPI.useGetAllCharactersQuery();
-    }
-  };
-
   const submitSearchInput = (inputValue: string) => {
-    setIsLoaded(false);
-    CheckSearchValue(inputValue);
+    dispatch(setStoreSearchValue(inputValue));
   };
 
   //   if (inputSavedValue) {
@@ -115,10 +94,17 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   return (
     <div className={cx('cartoon-page-wrapper')}>
       <Searcher handleSubmitSearch={submitSearchInput} />
+      {isError && <NotFoundMessage />}
       {isLoading ? (
         <Loader />
       ) : (
-        <CartoonCardsList characters={charactersList} cardClickHandler={clickLittleCardHandler} />
+        fetchedSearchCharacters &&
+        !isError && (
+          <CartoonCardsList
+            characters={fetchedSearchCharacters.results}
+            cardClickHandler={clickLittleCardHandler}
+          />
+        )
       )}
       {/*{showModal && selectedCharacter && portal && (*/}
       {/*  <ModalPortal*/}

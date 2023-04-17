@@ -35,11 +35,15 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   });
 
   useEffect(() => {
-    if (!searchRequest && fetchedAllCharacters) {
+    if (!searchRequest.length && fetchedAllCharacters) {
       setCharactersList(fetchedAllCharacters.results);
       setTimeout(() => setIsLoaded(true), 950);
     }
-  }, []);
+    if (searchRequest.length && fetchedSearchCharacters) {
+      setCharactersList(fetchedSearchCharacters.results);
+      setTimeout(() => setIsLoaded(true), 950);
+    }
+  });
 
   const clickLittleCardHandler = (id: number) => {
     console.log('1');

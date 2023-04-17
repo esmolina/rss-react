@@ -11,7 +11,7 @@ interface DefaultValues {
 }
 
 function Searcher({ handleSubmitSearch }: SearcherProps) {
-  const inputSavedValue = localStorage.getItem('inputValue') || '';
+  const inputSavedValue = '';
   const defaultValues: DefaultValues = {
     searchRequest: inputSavedValue,
   };

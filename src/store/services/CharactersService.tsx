@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { APICharactersResponse } from '../../components/RickAndMortyPage/RickAndMortyTypes';
+import {
+  APICharactersResponse,
+  Character,
+} from '../../components/RickAndMortyPage/RickAndMortyTypes';
 
 export const charactersAPI = createApi({
   reducerPath: 'api/characters',
@@ -8,7 +11,7 @@ export const charactersAPI = createApi({
     getSearchedCharacters: build.query<APICharactersResponse, string>({
       query: (request) => (request.length ? `/character/?name=${request}` : '/character'),
     }),
-    getSelectedCharacter: build.query<APICharactersResponse, number>({
+    getSelectedCharacter: build.query<Character, number>({
       query: (id) => ({ url: `/character/${id}` }),
     }),
   }),

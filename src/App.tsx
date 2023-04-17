@@ -16,6 +16,7 @@ import {
 import HomePage from './components/HomePage/HomePage';
 import FeedbackPage from './components/Feedback/FeedbackPage/FeedbackPage';
 import CartoonPage from './components/RickAndMortyPage/CartoonCharactersPage/CartoonChatactersPage';
+import Exp from './components/RickAndMortyPage/CartoonCharactersPage/exp';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('');
@@ -55,6 +56,7 @@ function App() {
           path="/api"
           element={<CartoonPage handleGoAnotherChange={handleGoAnotherChange} />}
         />
+        <Route path="/exp" element={<Exp handleGoAnotherChange={handleGoAnotherChange} />} />
         <Route path="*" element={<Page404 handleGoAnotherChange={handleGoAnotherChange} />} />
       </Routes>
       <Footer />

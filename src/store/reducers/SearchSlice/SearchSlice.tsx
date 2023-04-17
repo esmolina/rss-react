@@ -13,7 +13,11 @@ const initialState: SearchStateInterface = {
 export const SearchSlice = createSlice({
   name: 'searcher',
   initialState,
-  reducers: {},
+  reducers: {
+    setStoreSearchValue(state, action: PayloadAction) {
+      state.searchRequest = '' + action.payload;
+    },
+  },
   extraReducers: {
     [fetchCharacters.pending.type]: (state, action: PayloadAction<APICharactersResponse>) => {
       state.isLoaded = true;

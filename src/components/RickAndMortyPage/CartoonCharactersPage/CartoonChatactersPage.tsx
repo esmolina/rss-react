@@ -4,24 +4,28 @@ import classNames from 'classnames/bind';
 import styles from './CartoonCharactersPage.module.scss';
 import { CartoonPageProps } from './CartoonCharactersPageTypes';
 import { useAppDispatch, useAppSelector } from '../../../customHooks/reduxStoreHooks';
-import { fetchCharacters } from '../../../store/reducers/ActionCreators';
 import CartoonCardsList from '../CartoonCardsList/CartoonCardsList';
 import Loader from '../../Elements/Loader/Loader';
-import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
+import { charactersAPI } from '../../../store/services/CharactersService';
+import Searcher from '../../Searcher/Searcher';
+import { SearchSlice } from '../../../store/reducers/SearchSlice/SearchSlice';
 
 const cx = classNames.bind(styles);
 const portal = document.getElementById('portal') as HTMLDivElement;
 
 function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const dispatch = useAppDispatch();
-  const { searchResponse, isLoaded, error } = useAppSelector((state) => state.searchReducer);
+  const { searchRequest } = useAppSelector((state) => state.searchReducer);
+  const { setStoreSearchValue } = SearchSlice.actions;
 
-  useEffect(() => {
-    dispatch(fetchCharacters('Morty'));
-  }, []);
+  const { data: fetchedAllCharacters, isLoading } = charactersAPI.useGetAllCharactersQuery();
+
+  const { data: fetchedSearchCharacters } = charactersAPI.useGetSearchedCharactersQuery(
+    `${searchRequest}`
+  );
 
   const [charactersList, setCharactersList] = useState<Character[]>([]);
-  // const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [isLoadedModal, setIsLoadedModal] = useState(false);
@@ -30,12 +34,43 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
     handleGoAnotherChange('API');
   });
 
+  useEffect(() => {
+    if (!searchRequest && fetchedAllCharacters) {
+      setCharactersList(fetchedAllCharacters.results);
+      setTimeout(() => setIsLoaded(true), 950);
+    }
+  }, []);
+
   const clickLittleCardHandler = (id: number) => {
     console.log('1');
   };
 
-  // useEffect(() => {
-  //   const inputSavedValue = localStorage.getItem('inputValue') || '';
+  const CheckSearchValue = (testedValue: string) => {
+    const { data: fetchedCharacters } = charactersAPI.useGetSearchedCharactersQuery(
+      `${testedValue}`
+    );
+
+    if (testedValue) {
+      if (fetchedCharacters) {
+        setCharactersList(fetchedCharacters.results);
+        setTimeout(() => setIsLoaded(true), 950);
+      }
+
+      if (!fetchedCharacters) {
+        setCharactersList([]);
+        setTimeout(() => setIsLoaded(true), 950);
+      }
+    }
+    if (!testedValue) {
+      const { data: fetchedCharacters } = charactersAPI.useGetAllCharactersQuery();
+    }
+  };
+
+  const submitSearchInput = (inputValue: string) => {
+    setIsLoaded(false);
+    CheckSearchValue(inputValue);
+  };
+
   //   if (inputSavedValue) {
   //     NetworkClient.getFiltredForNameCharacters(inputSavedValue).then(
   //       (filtredCharacter: APICharactersResponse | null) => {
@@ -56,7 +91,9 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   //       setTimeout(() => setIsLoaded(true), 950);
   //     });
   //   }
-  // }, []);
+  // },
+  //   []
+  // );
 
   // const clickLittleCardHandler = (id: number) => {
   //   setIsLoadedModal(false);
@@ -70,30 +107,15 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   //   setShowModal(true);
   // };
   //
-  // const submitSearchInput = (inputValue: string) => {
-  //   setIsLoaded(false);
-  //   NetworkClient.getFiltredForNameCharacters(inputValue).then(
-  //     (filtredCharacter: APICharactersResponse | null) => {
-  //       if (!filtredCharacter) {
-  //         setCharactersList([]);
-  //         setTimeout(() => setIsLoaded(true), 950);
-  //       }
-  //       if (filtredCharacter) {
-  //         setCharactersList(filtredCharacter.results);
-  //         setTimeout(() => setIsLoaded(true), 950);
-  //       }
-  //     }
-  //   );
-  // };
 
   return (
     <div className={cx('cartoon-page-wrapper')}>
-      {/*<Searcher handleSubmitSearch={submitSearchInput} />*/}
-      {/*{!isLoaded ? (*/}
-      {/*  <Loader />*/}
-      {/*) : (*/}
-      {/*  <CartoonCardsList characters={charactersList} cardClickHandler={clickLittleCardHandler} />*/}
-      {/*)}*/}
+      <Searcher handleSubmitSearch={submitSearchInput} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <CartoonCardsList characters={charactersList} cardClickHandler={clickLittleCardHandler} />
+      )}
       {/*{showModal && selectedCharacter && portal && (*/}
       {/*  <ModalPortal*/}
       {/*    character={selectedCharacter}*/}
@@ -102,15 +124,6 @@ function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
       {/*    isLoadedModal={isLoadedModal}*/}
       {/*  />*/}
       {/*)}*/}
-
-      {isLoaded && <Loader />}
-      {error && <NotFoundMessage />}
-      {searchResponse && (
-        <CartoonCardsList
-          characters={searchResponse.results}
-          cardClickHandler={clickLittleCardHandler}
-        />
-      )}
     </div>
   );
 }

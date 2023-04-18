@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import styles from './Searcher.module.scss';
 import { SearcherProps, SearchFormFields } from './SearcherTypes';
+import { useAppSelector } from '../../customHooks/reduxStoreHooks';
 
 const cx = classNames.bind(styles);
 
@@ -11,9 +12,9 @@ interface DefaultValues {
 }
 
 function Searcher({ handleSubmitSearch }: SearcherProps) {
-  const inputSavedValue = '';
+  const { searchRequest } = useAppSelector((state) => state.searchReducer);
   const defaultValues: DefaultValues = {
-    searchRequest: inputSavedValue,
+    searchRequest: searchRequest,
   };
 
   const { register, handleSubmit, getValues } = useForm<SearchFormFields>({

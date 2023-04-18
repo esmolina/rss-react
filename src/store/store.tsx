@@ -12,7 +12,10 @@ export const rootReducer = combineReducers({
 export const manageStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(charactersAPI.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(charactersAPI.middleware),
   });
 };
 

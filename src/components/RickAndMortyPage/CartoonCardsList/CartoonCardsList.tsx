@@ -5,30 +5,31 @@ import { CartoonCardsListProps } from './CartoonCardsListTypes';
 import { Character } from '../RickAndMortyTypes';
 import CartoonLittleCard from '../LittleCard/CartoonLittleCard';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
-import { useGetSelectedCharacterQuery } from '../../../store/services/CharactersService';
+import { useAppDispatch, useAppSelector } from '../../../customHooks/reduxStoreHooks';
+import { fetchCharacter } from '../../../store/reducers/ActionCreators';
 import ModalPortal from '../ModalPortal/ModalPortal';
 
 const cx = classNames.bind(styles);
 const portal = document.getElementById('portal') as HTMLDivElement;
 
 function CartoonCardsList({ characters }: CartoonCardsListProps) {
-  const [selectedCharacter, setSelectedCharacter] = useState<number>(0);
+  const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState(false);
-  const { data: fetchedCharacter, isLoading } = useGetSelectedCharacterQuery(selectedCharacter);
+  const { selectedCharacter, isLoaded } = useAppSelector((state) => state.modalReducer);
 
   const clickLittleCardHandler = (id: number) => {
-    setSelectedCharacter(id);
+    dispatch(fetchCharacter(id));
     setShowModal(true);
   };
 
   return (
     <div>
-      {showModal && fetchedCharacter && portal && !isLoading && (
+      {showModal && selectedCharacter && portal && !isLoaded && (
         <ModalPortal
-          character={fetchedCharacter}
+          character={selectedCharacter}
           setShowModal={setShowModal}
           container={portal}
-          isLoadedModal={!isLoading}
+          isLoadedModal={!isLoaded}
         />
       )}
       {characters.length === 0 && <NotFoundMessage />}

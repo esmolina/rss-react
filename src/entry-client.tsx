@@ -10,7 +10,7 @@ ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/rss-react">
         <App />
       </BrowserRouter>
     </Provider>

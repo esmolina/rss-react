@@ -16,8 +16,14 @@
     "noImplicitAny": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src/"
+    "baseUrl": "src/",
+    "useDefineForClassFields": true
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }

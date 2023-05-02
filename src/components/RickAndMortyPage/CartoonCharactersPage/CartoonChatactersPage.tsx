@@ -7,39 +7,40 @@ import CartoonCardsList from '../CartoonCardsList/CartoonCardsList';
 import Loader from '../../Elements/Loader/Loader';
 import Searcher from '../../Searcher/Searcher';
 import { SearchSlice } from '../../../store/reducers/SearchSlice/SearchSlice';
-import { useGetSearchedCharactersQuery } from '../../../store/services/CharactersService';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
+import { fetchCharacters } from '../../../store/reducers/ActionCreators';
 
 const cx = classNames.bind(styles);
 
 function CartoonPage({ handleGoAnotherChange }: CartoonPageProps) {
   const dispatch = useAppDispatch();
-  const { searchRequest } = useAppSelector((state) => state.searchReducer);
   const { setStoreSearchValue } = SearchSlice.actions;
-
-  const {
-    data: fetchedSearchCharacters,
-    isLoading,
-    isError,
-  } = useGetSearchedCharactersQuery(searchRequest);
+  const { searchRequest, searchResponse, isLoaded, error } = useAppSelector(
+    (state) => state.searchReducer
+  );
 
   useEffect(() => {
     handleGoAnotherChange('API');
   });
 
+  useEffect(() => {
+    dispatch(fetchCharacters(searchRequest));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const submitSearchInput = (inputValue: string) => {
     dispatch(setStoreSearchValue(inputValue));
+    dispatch(fetchCharacters(inputValue));
   };
 
   return (
     <div className={cx('cartoon-page-wrapper')}>
       <Searcher handleSubmitSearch={submitSearchInput} />
-      {isError && <NotFoundMessage />}
-      {isLoading ? (
+      {error && <NotFoundMessage />}
+      {isLoaded ? (
         <Loader />
       ) : (
-        fetchedSearchCharacters &&
-        !isError && <CartoonCardsList characters={fetchedSearchCharacters.results} />
+        searchResponse && !error && <CartoonCardsList characters={searchResponse.results} />
       )}
     </div>
   );
